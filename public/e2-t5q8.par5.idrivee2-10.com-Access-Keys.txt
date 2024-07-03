@@ -1,0 +1,3 @@
+Endpoint: t5q8.par5.idrivee2-10.com
+Access Key ID: Axxjr28ooTHiCttcO8au
+Secret Access Key: 5CPmSCZit8NMUmsD5SeqLq6nzVCEpc2aSug8HAMB

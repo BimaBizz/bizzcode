@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.background-radial-gradient {
+  background-color: transparent;
+  background-image:
+        radial-gradient(
+          350px circle at 100% 300px,
+          hsla(239, 84%, 67%, 0.8) 15%,
+          hsla(239, 84%, 67%, 0.700) 35%,
+          hsla(239, 84%, 67%, 0.650) 50%,
+          hsla(239, 84%, 67%, 0.500) 80%,
+          transparent 100%
+        ),
+        radial-gradient(
+          500px circle at 0% 40%,
+          hsla(239, 84%, 67%, 0.8) 15%,
+          hsla(239, 84%, 67%, 0.700) 35%,
+          hsla(239, 84%, 67%, 0.650) 50%,
+          hsla(239, 84%, 67%, 0.500) 80%,
+          transparent 100%
+        ),
+        radial-gradient(
+          500px circle at 100% 80%,
+          hsla(239, 84%, 67%, 0.8) 15%,
+          hsla(239, 84%, 67%, 0.700) 35%,
+          hsla(239, 84%, 67%, 0.650) 50%,
+          hsla(239, 84%, 67%, 0.500) 80%,
+          transparent 100%
+        );
+        
+  animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.container-scroll {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.container-scroll::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}

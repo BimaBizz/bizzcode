@@ -1,0 +1,20 @@
+'use client'
+
+import Link from 'next/link'
+import React from 'react'
+
+const Experient = (props) => {
+  return (
+    <section className='relative flex flex-col w-full max-w-5xl mx-auto p-4 justify-center items-center min-h-screen'>
+        <div className='max-w-3xl self-start'>
+            <h1 data-aos="fade-right" data-aos-duration="1500" className={`text-3xl font-bold self-start mb-10 ${props.class}`}>🧑‍💻 My Lerning Experient.</h1>
+            <p data-aos="fade-left" data-aos-duration="1500" className='text-lg text-slate-300'>My learning experience as a front-end web developer has been both challenging and rewarding. Starting with the basics of HTML and CSS, I quickly advanced to JavaScript and modern frameworks like React and Next.js. Through various projects, I&apos;ve gained hands-on experience in responsive design, CSS animations, and API integration.</p>
+            <div className='mt-16' data-aos="fade-up" data-aos-duration="1500">
+            <Link href={"/about"} className='text-indigo-500 underline underline-offset-4 font-bold transition-colors'>About Me</Link>
+            </div>
+        </div>
+    </section>
+  )
+}
+
+export default Experient
