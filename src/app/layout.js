@@ -21,7 +21,7 @@ const inter = Poppins({ subsets: ["latin"], weight:["100", "200", "300", "400", 
 
 export const metadata = {
   title: {
-    template: '%s  - BizzCode',
+    template: '%s - BizzCode',
     default: 'Home - BizzCode', 
   },
   description: 'Selamat datang di Bizzcode, portofolio resmi Bima Mahendra, seorang Frontend Web Developer berbakat. Jelajahi karya terbaik saya dalam pengembangan web modern, desain responsif, dan pengalaman pengguna yang luar biasa. Temukan bagaimana saya dapat membantu mewujudkan proyek digital Anda dengan teknologi terkini.',
