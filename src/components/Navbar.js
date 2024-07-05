@@ -41,7 +41,7 @@ const Navbar = () => {
     <>
     <nav className='flex w-full max-w-5xl items-center justify-between mx-auto px-4 py-14 relative'>
         <Link href='/' className='text-3xl font-bold flex items-center' data-aos="fade-right" data-aos-duration="1500">
-            <Image src="/iconbg.svg" alt="logo" width={100} height={100} className='mr-2 h-auto w-auto sm:h-10 sm:w-10 md:h-16 md:w-16'/>
+            <Image src="/iconbg.svg" alt="logo" width={100} height={100} className='mr-2 h-12 w-12 md:h-16 md:w-16'/>
         </Link>
         <button onClick={toogler} className='md:hidden' data-aos="fade-left" data-aos-duration="1500">
         <svg className="w-8 h-8 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -51,7 +51,8 @@ const Navbar = () => {
         <ul className='hidden md:flex justify-center space-x-12 items-center'>
             <li data-aos="fade-up" data-aos-duration="1000"><Link href={"/projects"} className='text-slate-300 hover:text-white'>Works</Link></li>
             <li data-aos="fade-up" data-aos-duration="1500"><Link href={"/about"} className='text-slate-300 hover:text-white'>About Me</Link></li>
-            <li data-aos="fade-up" data-aos-duration="2000"><Link href={"/contact"} className='text-slate-300 hover:text-white'>Get in touch</Link></li>
+            <li data-aos="fade-up" data-aos-duration="2000"><Link href={"/blogs"} className='text-slate-300 hover:text-white'>Blog</Link></li>
+            <li data-aos="fade-up" data-aos-duration="2500"><Link href={"/contact"} className='text-slate-300 hover:text-white'>Get in touch</Link></li>
         </ul>
         
     </nav>
@@ -65,6 +66,7 @@ const Navbar = () => {
             <ul className='flex flex-col justify-center space-y-5 items-center h-[80%] text-3xl font-bold text-indigo-700'>
                 <li className='hover:underline hover:underline-offset-4'><Link href={"/projects"}>Works</Link></li>
                 <li className='hover:underline hover:underline-offset-4'><Link href={"/about"}>About Me</Link></li>
+                <li className='hover:underline hover:underline-offset-4'><Link href={"/blogs"}>Blog</Link></li>
                 <li className='hover:underline hover:underline-offset-4'><Link href={"/contact"}>Get in touch</Link></li>
             </ul>
         </div>
