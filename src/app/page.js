@@ -14,7 +14,6 @@
  * along with BizzCode Website Project. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { Jost } from "next/font/google";
 import Hero from "@/components/Hero";
