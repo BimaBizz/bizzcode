@@ -20,6 +20,7 @@ export async function getData() {
       headers: {
         'Api-Key': process.env.API_KEY,
       },
+      next : {revalidate: 10},
     });
   
     if (!res.ok) {

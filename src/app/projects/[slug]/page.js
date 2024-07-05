@@ -48,7 +48,8 @@ async function getData({ slug }) {
         headers: {
           'Content-Type': 'application/json',
           'Api-Key': process.env.API_KEY
-        }
+        },
+        cache : 'no-store'
     } 
     )
     if (!res.ok) {
