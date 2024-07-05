@@ -20,10 +20,16 @@ import React, { useState } from 'react'
 const MessageForm = ({ onSubmit }) => {
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit({'data' : { name, message }})
+    if (name.trim() === '' || message.trim() === '') {
+      setError('Both name and message fields are required.')
+      return
+    }
+    setError('') // Clear error message if validation passes
+    onSubmit({ data: { name, message } })
     setName('')
     setMessage('')
   }
@@ -32,6 +38,7 @@ const MessageForm = ({ onSubmit }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black">
       <div className="bg-white/50 backdrop-blur-sm rounded-lg p-8 max-w-md w-full">
         <h2 className="text-xl font-bold mb-4">Leave a Trace</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
