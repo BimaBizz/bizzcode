@@ -93,18 +93,18 @@ const AboutMe = (props) => {
 
   return (
     <>
-      <section className='relative flex w-full items-center max-w-5xl mx-auto p-4 min-h-screen' itemtype="https://schema.org/ProfilePage" itemscope>
-        <div className='max-w-3xl' itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
+      <section className='relative flex w-full items-center max-w-5xl mx-auto p-4 min-h-screen' itemType="https://schema.org/ProfilePage" itemScope>
+        <div className='max-w-3xl' itemProp="mainEntity" itemType="https://schema.org/Person" itemScope>
           <div className='flex items-center justify-start mb-4' data-aos="fade-right" data-aos-duration="1500">
-          <meta itemprop="identifier" content="123475623" />
+          <meta itemProp="identifier" content="123475623" />
             {loading ? (
               <div height={80} width={80} className='rounded-full bg-slate-400 animate-pulse max-w-[90%]'/>
             ) : (
-              <Image itemprop="image" src={"https://admin.bizzcode.site/storage/uploads"+data.image.path} alt={data.image.title} className='rounded-full h-auto w-auto' width={80} height={80}/>
+              <Image itemProp="image" src={"https://admin.bizzcode.site/storage/uploads"+data.image.path} alt={data.image.title} className='rounded-full h-auto w-auto' width={80} height={80}/>
             )}
-            <h2 className='text-4xl font-bold ml-5' itemprop="name" id="real-name">Bima Mahendra</h2>
+            <h2 className='text-4xl font-bold ml-5' itemProp="name" id="real-name">Bima Mahendra</h2>
           </div>
-          <div itemprop="description" dangerouslySetInnerHTML={{__html: data.deskripsi}} className='text-wrap text-slate-300 space-y-5' data-aos="fade-left" data-aos-duration="1500"></div>
+          <div itemProp="description" dangerouslySetInnerHTML={{__html: data.deskripsi}} className='text-wrap text-slate-300 space-y-5' data-aos="fade-left" data-aos-duration="1500"></div>
           <div className='flex gap-4 mt-8'>
             {data.sosmed.map((media, index) => (
               <div key={index} className='text-xl p-2 border border-slate-300 text-slate-300 uppercase' data-aos="fade-up" data-aos-duration={1500+(index*300)}>
@@ -134,7 +134,7 @@ const AboutMe = (props) => {
               <span className='ml-2'>Loading...</span>
           </div>
             ) : (
-              <div>
+              <div className='flex flex-col gap-5'>
                 {pesan.length > 0 ? (
                   pesan.map((item, index) => (
                     <div key={index} className='flex-col gap-5 p-2 border border-slate-300 rounded-md backdrop-blur-sm bg-[#1c1d2c]/50' data-aos={index % 2 ? "fade-right" : "fade-left"} data-aos-duration={1500+(index*300)}>
