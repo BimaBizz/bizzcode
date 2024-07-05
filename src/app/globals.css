@@ -68,3 +68,54 @@
 .container-scroll::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+#post {
+  @apply space-y-4
+}
+
+#post h1 {
+  @apply text-3xl text-white font-bold
+}
+#post h2 {
+  @apply text-2xl text-white font-bold
+}
+#post h3 {
+  @apply text-xl text-white font-bold
+}
+#post h4 {
+  @apply text-lg text-white font-bold
+}
+#post h5 {
+  @apply text-base text-white font-bold
+}
+#post h6 {
+  @apply text-sm text-white font-bold
+}
+
+#post a {
+  @apply text-indigo-500 underline underline-offset-2
+}
+
+#post ul {
+  @apply max-w-md space-y-1 list-disc list-inside text-gray-400
+}
+
+#post ol {
+  @apply ps-5 mt-2 space-y-1 list-decimal list-inside text-gray-400
+}
+
+#post hr {
+  @apply border-slate-400
+}
+
+#post table {
+  @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-lg overflow-hidden
+}
+
+#post tr {
+  @apply border-b bg-gray-800 border-gray-700 hover:bg-gray-600
+}
+
+#post td {
+  @apply px-6 py-3
+}
