@@ -42,11 +42,7 @@ Buka http://localhost:3000 di browser Anda untuk melihat hasilnya.
 
 ## Blokir Kata Kasar
 
-Daftar kata-kata kasar yang diblokir dapat ditemukan dan dimodifikasi di file utils/badwords.js.
-
-## Kontribusi
-
-Saya menyambut kontribusi dari siapa saja. Silakan buat pull request atau buka issue untuk menyarankan perbaikan atau fitur baru.
+Daftar kata-kata kasar yang diblokir dapat ditemukan dan dimodifikasi di file src/components/badWors.json.
 
 ## Lisensi
 
