@@ -16,6 +16,8 @@
 
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { GoogleTagManager } from '@next/third-parties/google'
+
 
 const inter = Poppins({ subsets: ["latin"], weight:["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -54,7 +56,7 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: false,
-      noimageindex: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -69,7 +71,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-[#1c1d2c] text-white`} >{children}</body>
+      <GoogleTagManager gtmId={process.env.GOOGLE_ANALYSTICS} />
+      <body className={`${inter.className} bg-[#1c1d2c] text-white`} >
+        {children}</body>
     </html>
   );
 }
