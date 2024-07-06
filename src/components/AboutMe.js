@@ -21,6 +21,7 @@ import Link from 'next/link'
 import MessageForm from './MessageForm'
 import Filter from 'bad-words'
 import customBadWords from './badWords.json'
+import { sendGAEvent } from '@next/third-parties/google'
 
 const AboutMe = (props) => {
   const data = props.data
@@ -85,6 +86,12 @@ const AboutMe = (props) => {
       }
       const newMessage = await res.json()
       setPesan([newMessage, ...pesan])
+      sendGAEvent({
+        category: 'Trace',
+        action: 'Submit',
+        label: 'trace user',
+        value: 'Success'
+      });
       setShowForm(false)
     } catch (error) {
       console.error(error)

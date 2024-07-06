@@ -17,6 +17,8 @@
 'use client'
 
 import React, { useState } from 'react';
+import { sendGAEvent } from '@next/third-parties/google'
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -62,6 +64,13 @@ const Contact = () => {
       if (response.ok) {
         setNotification({ show: true, message: 'Your message has been sent successfully!', type: 'success' });
         setFormData({ name: '', email: '', message: '' });
+
+        sendGAEvent({
+          category: 'Contact',
+          action: 'Submit',
+          label: 'Contact Form',
+          value: 'Success'
+        });
       } else {
         setNotification({ show: true, message: 'Failed to send your message. Please try again later.', type: 'error' });
       }
