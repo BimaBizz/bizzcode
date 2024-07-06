@@ -14,40 +14,35 @@
  * along with BizzCode Website Project. If not, see <https://www.gnu.org/licenses/>.
  */
 
+// lib/fetchSitemapData.js
 export async function getData() {
-    const res = await fetch(process.env.API_URL + '/content/items/sitemap', {
-      method: 'GET',
-      headers: {
-        'Api-Key': process.env.API_KEY,
-      },
-      next : {revalidate: 10},
-    });
-  
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data');
-    }
-  
-    return res.json();
+  const res = await fetch(process.env.API_URL + '/content/item/sitemapmain', {
+    method: 'GET',
+    headers: {
+      'Api-Key': process.env.API_KEY,
+    },
+    next: { revalidate: 10 },
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
   }
+
+  return res.json();
+}
+
+// pages/sitemap.js
+export default async function sitemap() {
+  const data = await getData();
   
-  export default async function sitemap() {
-    let data;
-    try {
-      data = await getData();
-    } catch (error) {
-      console.error('Error fetching sitemap data:', error);
-      return [];
-    }
-  
-    const dynamicSitemap = data.map(item => ({
-      url: `${item.url}`,
-      lastModified: new Date(item.lastmod),
-      priority: item.priority,
-    }));
-  
-    return [
-      ...dynamicSitemap,
-    ];
-  }
-  
+  const listmain = data.listmain.map(item => ({
+    url: item.url,
+    lastModified: new Date(item.lastmod).toISOString(),
+    priority: item.priority,
+  }));
+
+  return [
+    ...listmain,
+  ];
+}
