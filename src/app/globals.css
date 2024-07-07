@@ -97,11 +97,11 @@
 }
 
 #post ul {
-  @apply max-w-md space-y-1 list-disc list-inside text-gray-400
+  @apply max-w-md space-y-1 list-disc list-inside text-gray-300
 }
 
 #post ol {
-  @apply ps-5 mt-2 space-y-1 list-decimal list-inside text-gray-400
+  @apply ps-5 mt-2 space-y-1 list-decimal list-inside text-gray-300
 }
 
 #post hr {
@@ -118,4 +118,8 @@
 
 #post td {
   @apply px-6 py-3
+}
+
+#post pre {
+  @apply bg-slate-500/50 backdrop-blur-sm text-gray-100 p-4 rounded-lg relative overflow-auto container-scroll text-sm;
 }
