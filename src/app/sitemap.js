@@ -14,7 +14,7 @@
  * along with BizzCode Website Project. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// lib/fetchSitemapData.js
+
 export async function getData() {
   const res = await fetch(process.env.API_URL + '/content/item/sitemapmain', {
     method: 'GET',
