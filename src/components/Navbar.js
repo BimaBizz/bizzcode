@@ -45,7 +45,7 @@ const Navbar = () => {
         <Link href='/' className='text-3xl font-bold flex items-center' data-aos="fade-right" data-aos-duration="1500">
             <Image src="/iconbg.svg" alt="logo" width={100} height={100} className='mr-2 h-12 w-12 md:h-16 md:w-16'/>
         </Link>
-        <button onClick={toogler} className='md:hidden' data-aos="fade-left" data-aos-duration="1500">
+        <button onClick={toogler} className='md:hidden' data-aos="fade-left" data-aos-duration="1500" aria-label='menu'>
         <svg className="w-8 h-8 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14"/>
         </svg>

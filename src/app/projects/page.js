@@ -79,7 +79,7 @@ export async function getData() {
         <div className="background-radial-gradient absolute z-0 top-0 right-0 overflow-hidden h-full w-full hidden lg:block"></div>
         <Navbar />
         <HeaderPages class={JostFont.className} title="My Work" subtitle="Some of the works are from my homework and some are on my own time.">
-          <p className="font-semibold mt-14" data-aos="fade-up" data-aos-duration="1500">Come and see my <Link href={"https://github.com/BimaBizz"} target="_blank" className="text-indigo-500 underline underline-offset-4">Github</Link></p>
+          <p className="font-semibold mt-14" data-aos="fade-up" data-aos-duration="1500">Come and see my <Link href={"https://github.com/BimaBizz"} target="_blank" className="text-white md:text-indigo-500 underline underline-offset-4">Github</Link></p>
         </HeaderPages>
         <Projects data={data} titile={null}/>
         <div className="h-20"></div>
