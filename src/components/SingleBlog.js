@@ -20,6 +20,7 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+
 const SingleBlog = (props) => {
     const blog = props.data
 
@@ -57,22 +58,22 @@ const SingleBlog = (props) => {
     }, [blog.post]);
 
     return (
-        <section className='relative' itemscope itemtype="https://schema.org/BlogPosting">
+        <section className='relative' itemScope itemType="https://schema.org/BlogPosting">
             <div className='flex flex-col md:flex-row w-full max-w-5xl justify-center items-center mx-auto p-4 gap-10'>
                 <div className='object-center rounded-xl overflow-hidden w-full h-[400px]' data-aos="fade-up" data-aos-duration="1500">
                     <Image src={`https://admin.bizzcode.site/storage/uploads${blog.image[0].path}`} width={950} height={800} alt={blog.image[0].title} className='h-full w-full object-cover' priority={true} itemProp="image" content={`https://admin.bizzcode.site/storage/uploads${blog.image[0].path}`}/>
                 </div>
             </div>
             <div className='text-slate-300 max-w-5xl mx-auto text-sm p-4 flex justify-between items-center mt-5' data-aos="fade-up" data-aos-duration="1800">
-            <div className='flex items-center' itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <div className='flex items-center' itemProp="author" itemScope itemType="https://schema.org/Person">
               <Link href='https://bizzcode.site/about' itemProp="url" className='flex items-center'>
                 <Image src="/images/bima.png" alt="HTML 5" width={50} height={50} className='rounded-full'/>
-                <p className='text-slate-300 text-sm ml-3'itemprop="name">Created by Bima Mahendra</p>
+                <p className='text-slate-300 text-sm ml-3'itemProp="name">Created by Bima Mahendra</p>
               </Link>
             </div>
             <p className='' itemProp="datePublished" content={blog.upload_at}>Upload at : {blog.upload_at}</p>
             </div>
-            <h1 className='text-3xl font-bold max-w-5xl mx-auto p-4' data-aos="fade-up" data-aos-duration="2000" itemprop="headline">{blog.titile}</h1>
+            <h1 className='text-3xl font-bold max-w-5xl mx-auto p-4' data-aos="fade-up" data-aos-duration="2000" itemProp="headline">{blog.titile}</h1>
             <div className='w-full max-w-5xl mx-auto p-4'>
                 <hr className='border-slate-400 mb-5' data-aos="fade-up" data-aos-duration="1500"/>
                 <div id='post' dangerouslySetInnerHTML={{__html: fixImageUrls(blog.post)}} className='text-wrap text-slate-300 text-justify text-lg' data-aos="fade-up" data-aos-duration="1500"></div>
