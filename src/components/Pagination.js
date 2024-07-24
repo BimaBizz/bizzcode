@@ -33,13 +33,17 @@ export default function Pagination({ currentPage }) {
 
   return (
     <div className="relative mx-auto max-w-5xl mt-10 flex items-center justify-between p-4" data-aos="fade-up" data-aos-duration="2000">
-      <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="disabled:opacity-50 bg-indigo-500 px-4 py-2 rounded-lg">
-        Previous
-      </button>
-      <span>Page {currentPage}</span>
-      <button onClick={() => handlePageChange(currentPage + 1)} className="disabled:opacity-50 bg-indigo-500 px-4 py-2 rounded-lg">
-        Next
-      </button>
+      <div className='w-full flex justify-start'>
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="disabled:opacity-50 bg-indigo-500 px-4 py-2 rounded-lg">
+          Previous
+        </button>
+      </div>
+      <p className='min-w-fit'>Page {currentPage}</p>
+      <div className='w-full flex justify-end'>
+        <button onClick={() => handlePageChange(currentPage + 1)} className="disabled:opacity-50 bg-indigo-500 px-4 py-2 rounded-lg">
+          Next
+        </button>
+      </div>
     </div>
   )
 }

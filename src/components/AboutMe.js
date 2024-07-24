@@ -114,8 +114,8 @@ const AboutMe = (props) => {
           <div itemProp="description" dangerouslySetInnerHTML={{__html: data.deskripsi}} className='text-wrap text-slate-300 space-y-5' data-aos="fade-left" data-aos-duration="1500"></div>
           <div className='flex gap-4 mt-8'>
             {data.sosmed.map((media, index) => (
-              <div key={index} className='text-xl p-2 border border-slate-300 text-slate-300 uppercase' data-aos="fade-up" data-aos-duration={1500+(index*300)}>
-                <Link href={media.link} target="_blank">{media.name}</Link>
+              <div key={index} className='text-xl py-2 px-4 rounded-lg border border-slate-300 text-slate-300 uppercase' data-aos="fade-up" data-aos-duration={1500+(index*300)}>
+                <Link href={media.link} target="_blank" className='flex justify-center items-center'><div dangerouslySetInnerHTML={{__html: media.svg}} className='mr-2'></div>{media.name}</Link>
               </div>
             ))}
           </div>
@@ -126,7 +126,7 @@ const AboutMe = (props) => {
           <div className='flex w-full justify-between items-center py-2'>
             <h2 className='text-xl font-bold' data-aos="fade-down" data-aos-duration="1500">a sign you&apos;ve been here</h2>
             <button 
-              className='border border-slate-300 text-slate-300 py-2 px-4 uppercase' 
+              className='border rounded-lg border-slate-300 text-slate-300 py-2 px-4 uppercase' 
               data-aos="fade-down" 
               data-aos-duration="1500" 
               onClick={() => setShowForm(true)} // Show form when clicked
@@ -144,7 +144,7 @@ const AboutMe = (props) => {
               <div className='flex flex-col gap-5'>
                 {pesan.length > 0 ? (
                   pesan.map((item, index) => (
-                    <div key={index} className='flex-col gap-5 p-2 border border-slate-300 rounded-md backdrop-blur-sm bg-[#1c1d2c]/50' data-aos={index % 2 ? "fade-right" : "fade-left"} data-aos-duration={1500+(index*300)}>
+                    <div key={index} className='flex-col gap-5 p-2 border border-slate-300 rounded-md backdrop-blur-sm bg-[#1c1d2c]/50' data-aos={index % 2 ? "fade-right" : "fade-left"} data-aos-duration={1500}>
                       <h3 className='text-xl text-indigo-500 font-bold'>{item.name}</h3>
                       <p>{item.message}</p>
                     </div>

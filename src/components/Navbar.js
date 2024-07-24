@@ -60,8 +60,12 @@ const Navbar = () => {
                         <hr className={`border-[1.5px] ${pathname === '/about' ? 'border-white translate-x-0' : 'border-slate-300 hover:border-white'} -translate-x-[100%] w-[75%] group-hover:translate-x-0 transition-all duration-500`} />
                     </li>
                     <li className={`overflow-hidden group ${pathname === '/blogs' ? 'text-white border-white' : 'text-slate-300 hover:text-white'}`} data-aos="fade-up" data-aos-duration="2000">
-                        <Link href="/blogs">Blog</Link>
+                        <Link href="/blogs">Blogs</Link>
                         <hr className={`border-[1.5px] ${pathname === '/blogs' ? 'border-white translate-x-0' : 'border-slate-300 hover:border-white'} -translate-x-[100%] w-[75%] group-hover:translate-x-0 transition-all duration-500`} />
+                    </li>
+                    <li className={`overflow-hidden group ${pathname === '/certificate' ? 'text-white border-white' : 'text-slate-300 hover:text-white'}`} data-aos="fade-up" data-aos-duration="2500">
+                        <Link href="/certificate">Certificates</Link>
+                        <hr className={`border-[1.5px] ${pathname === '/certificate' ? 'border-white translate-x-0' : 'border-slate-300 hover:border-white'} -translate-x-[100%] w-[75%] group-hover:translate-x-0 transition-all duration-500`} />
                     </li>
                     <li className={`overflow-hidden group ${pathname === '/contact' ? 'text-white border-white' : 'text-slate-300 hover:text-white'}`} data-aos="fade-up" data-aos-duration="2500">
                         <Link href="/contact">Get in touch</Link>
@@ -77,16 +81,19 @@ const Navbar = () => {
                     Close Menu
                 </button>
                 <ul className='flex flex-col justify-center space-y-5 items-center h-[80%] text-3xl font-bold text-indigo-700'>
-                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/projects' ? 'text-indigo-500' : ''}`}>
+                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/projects' ? 'text-indigo-500 underline underline-offset-4' : ''}`}>
                         <Link href="/projects">Works</Link>
                     </li>
-                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/about' ? 'text-indigo-500' : ''}`}>
+                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/about' ? 'text-indigo-500 underline underline-offset-4' : ''}`}>
                         <Link href="/about">About Me</Link>
                     </li>
-                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/blogs' ? 'text-indigo-500' : ''}`}>
-                        <Link href="/blogs">Blog</Link>
+                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/blogs' ? 'text-indigo-500 underline underline-offset-4' : ''}`}>
+                        <Link href="/blogs">Blogs</Link>
                     </li>
-                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/contact' ? 'text-indigo-500' : ''}`}>
+                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/certificate' ? 'text-indigo-500 underline underline-offset-4' : ''}`}>
+                        <Link href="/certificate">Certificates</Link>
+                    </li>
+                    <li className={`hover:underline hover:underline-offset-4 ${pathname === '/contact' ? 'text-indigo-500 underline underline-offset-4' : ''}`}>
                         <Link href="/contact">Get in touch</Link>
                     </li>
                 </ul>

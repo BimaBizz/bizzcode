@@ -126,7 +126,7 @@ const ContactUs = () => {
           <button
             type="submit"
             data-aos="fade-up" data-aos-duration="2500"
-            className="col-span-2 w-full bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-lg font-bold"
+            className="col-span-2 w-full bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-lg"
           >
             Send message
           </button>

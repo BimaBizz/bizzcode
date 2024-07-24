@@ -30,7 +30,7 @@ const Projects = (props) => {
         {projects.map((project, index) => (
             <Link href={`/projects/${project.slug}`} className='w-full' key={index}  property="position" content={index+1} itemID={`https://admin.bizzcode.site/projects/${project.slug}`}>
                 <div  className='flex flex-col space-y-3 w-full group' data-aos="fade-up" data-aos-duration={1000 +(200 * index)} property="item" typeof="WebPage">
-                    <div className='object-cover object-center h-[350px] rounded-xl overflow-hidden md:group-hover:scale-[1.02] md:group-hover:transition-all md:group-hover:duration-500 mb-8 group-hover:shadow-lg group-hover:shadow-indigo-300'>
+                    <div className='object-cover object-center h-[350px] rounded-xl overflow-hidden md:group-hover:scale-[1.02] md:group-hover:transition-all md:group-hover:duration-500 mb-8'>
                         <Image src={`https://admin.bizzcode.site/storage/uploads${project.image.path}`} width={400} height={200} alt={project.image.title} className='h-full w-auto object-cover'priority={true}/>
                     </div>
                     <div className='flex space-x-4'>
