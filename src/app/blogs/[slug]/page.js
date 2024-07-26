@@ -52,7 +52,7 @@ async function getData({ slug }) {
           canonical: '/blogs/'+isi.slug,
         },
         openGraph: {
-          url: 'https://bizzcode.site/blogs/'+isi.slug,
+          url: 'https://www.bizzcode.site/blogs/'+isi.slug,
           siteName: isi.SEO.title+' - Bizzcode',
           images: 'https://admin.bizzcode.site/storage/uploads'+isi.SEO.image.path,
           type: 'website',

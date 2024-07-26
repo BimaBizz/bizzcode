@@ -1,0 +1,63 @@
+/* Highlight.js theme customization */
+.theme-atom-one-dark {
+  /* Optional: Adjust the maximum width to fit your design */
+  white-space: pre-wrap; /* Wrap the text */
+  word-wrap: break-word; /* Break long words */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Ensure the <pre> tags do not overflow */
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
+/* Highlight.js theme customization */
+.theme-atom-one-dark {
+  /* Optional: Adjust the maximum width to fit your design */
+  white-space: pre-wrap; /* Wrap the text */
+  word-wrap: break-word; /* Break long words */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Ensure the <pre> tags do not overflow */
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
+
+.hljs {
+  /* Any additional styles for Highlight.js */
+}
+
+.hljs code {
+  display: block; /* Ensure the code blocks are displayed as block elements */
+}
+
+/* Adjust the positioning of the copy button if necessary */
+.copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #4f46e5; /* Adjust the background color if necessary */
+  color: white;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Ensure the small element for language label is correctly positioned */
+small {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  border-bottom-left-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}

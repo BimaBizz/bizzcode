@@ -14,17 +14,17 @@
  * along with BizzCode Website Project. If not, see <https://www.gnu.org/licenses/>.
  */
 
-'use client'
+"use client";
 
-import React from 'react'
+import React from "react";
 
 const Footer = () => {
   return (
-    <footer className='flex flex-wrap max-w-5xl p-4 mx-auto justify-between items-center h-24 text-white relative' data-aos="fade-up" data-aos-duration="1500">
-        <p>Made with ❤️ by Bima Mahendra</p>
-        <p>© 2023 BizzCode. All Rights Reserved.</p>
+    <footer className="flex flex-wrap max-w-5xl 2xl:max-w-7xl p-4 mx-auto justify-between items-center h-24 text-white relative text-base 2xl:text-lg" data-aos="fade-up" data-aos-duration="1500">
+      <p>Made with ❤️ by Bima Mahendra</p>
+      <p>© 2023 BizzCode. All Rights Reserved.</p>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

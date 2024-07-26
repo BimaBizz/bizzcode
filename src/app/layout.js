@@ -37,12 +37,12 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://bizzcode.site'),
+  metadataBase: new URL('https://www.bizzcode.site'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    url: 'https://bizzcode.site',
+    url: 'https://www.bizzcode.site',
     siteName: 'Bima Mahendra - Bizzcode',
     images: '/SEO/og-bizzcode.png',
     type: 'website',

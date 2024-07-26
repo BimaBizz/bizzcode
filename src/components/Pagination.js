@@ -14,36 +14,36 @@
  * along with BizzCode Website Project. If not, see <https://www.gnu.org/licenses/>.
  */
 
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import Aos from 'aos'
-import { useEffect } from 'react'
+import { useRouter } from "next/navigation";
+import Aos from "aos";
+import { useEffect } from "react";
 
 export default function Pagination({ currentPage }) {
-  const router = useRouter()
+  const router = useRouter();
 
   const handlePageChange = (newPage) => {
-    router.push(`/blogs?page=${newPage}`)
-  }
+    router.push(`/blogs?page=${newPage}`);
+  };
 
   useEffect(() => {
-    Aos.init()
-  }, [])
+    Aos.init();
+  }, []);
 
   return (
-    <div className="relative mx-auto max-w-5xl mt-10 flex items-center justify-between p-4" data-aos="fade-up" data-aos-duration="2000">
-      <div className='w-full flex justify-start'>
+    <div className="relative mx-auto max-w-5xl 2xl:max-w-7xl mt-10 flex items-center justify-between p-4" data-aos="fade-up" data-aos-duration="2000">
+      <div className="w-full flex justify-start">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="disabled:opacity-50 bg-indigo-500 px-4 py-2 rounded-lg">
           Previous
         </button>
       </div>
-      <p className='min-w-fit'>Page {currentPage}</p>
-      <div className='w-full flex justify-end'>
+      <p className="min-w-fit">Page {currentPage}</p>
+      <div className="w-full flex justify-end">
         <button onClick={() => handlePageChange(currentPage + 1)} className="disabled:opacity-50 bg-indigo-500 px-4 py-2 rounded-lg">
           Next
         </button>
       </div>
     </div>
-  )
+  );
 }
