@@ -35,3 +35,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# security - credentials and keys
+*-Access-Keys.txt
+*-access-keys.txt
+*.key
+*.pem
+.env.*.credentials
+credentials.json
+secrets.json
+
