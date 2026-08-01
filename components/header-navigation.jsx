@@ -37,7 +37,7 @@ function DesktopMenuItem({ item, locale }) {
       </div>
 
       {hasChildren && (
-        <div className="absolute top-full left-0 mt-2 w-56 rounded-2xl border border-white/10 bg-[#0F221A]/95 backdrop-blur-2xl shadow-2xl p-2 hidden group-hover:block transition-all duration-300 z-50 animate-in fade-in slide-in-from-top-2">
+        <div className="absolute top-full left-0 mt-2 w-56 rounded-2xl border border-[#1E3A2C] bg-[#0F221A]/95 backdrop-blur-2xl shadow-2xl p-2 hidden group-hover:block transition-all duration-300 z-50 animate-in fade-in slide-in-from-top-2">
           {item.children.map((child, idx) => (
             <DesktopDropdownItem key={child.title || idx} item={child} locale={locale} />
           ))}
@@ -74,7 +74,7 @@ function DesktopDropdownItem({ item, locale }) {
       </Link>
 
       {hasChildren && (
-        <div className="absolute top-0 left-full ml-2 w-56 rounded-2xl border border-white/10 bg-[#0F221A]/95 backdrop-blur-2xl shadow-2xl p-2 hidden group-hover/sub:block transition-all duration-300 z-50 animate-in fade-in slide-in-from-left-2">
+        <div className="absolute top-0 left-full ml-2 w-56 rounded-2xl border border-[#1E3A2C] bg-[#0F221A]/95 backdrop-blur-2xl shadow-2xl p-2 hidden group-hover/sub:block transition-all duration-300 z-50 animate-in fade-in slide-in-from-left-2">
           {item.children.map((child, idx) => (
             <DesktopDropdownItem key={child.title || idx} item={child} locale={locale} />
           ))}
@@ -206,33 +206,36 @@ export default function HeaderNavigation({
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div
-          className="absolute top-full left-4 right-4 mt-3 md:hidden rounded-[28px] bg-[#0F221A]/95 border border-white/10 shadow-2xl p-6 space-y-6 z-50 animate-in fade-in slide-in-from-top-4 backdrop-blur-2xl"
-        >
-          <div className="space-y-3 divide-y divide-white/5">
-            {links.map((item, idx) => (
-              <div key={item.title || idx} className="pt-2 first:pt-0">
-                <MobileMenuItem
-                  item={item}
-                  locale={locale}
-                  onClose={() => setMobileMenuOpen(false)}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="pt-4 border-t border-white/10">
-            <Link
-              href={localePath(locale, "/contact")}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center font-bold text-sm py-3 px-5 rounded-[22px] bg-[#4ADE80] !text-[#062011] transition-all text-center cursor-pointer"
-            >
-              Hire Me
-            </Link>
-          </div>
+      <div
+        className={cn(
+          "absolute top-full left-4 right-4 mt-3 md:hidden rounded-[28px] bg-[#0F221A]/95 border border-[#1E3A2C] shadow-2xl p-6 z-50 backdrop-blur-2xl transition-all duration-350 ease-[cubic-bezier(.34,1.56,.64,1)] origin-top",
+          mobileMenuOpen
+            ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+            : "opacity-0 -translate-y-4 scale-95 pointer-events-none"
+        )}
+      >
+        <div className="divide-y divide-[#1E3A2C]/60">
+          {links.map((item, idx) => (
+            <div key={item.title || idx} className="py-3 first:pt-0 last:pb-0">
+              <MobileMenuItem
+                item={item}
+                locale={locale}
+                onClose={() => setMobileMenuOpen(false)}
+              />
+            </div>
+          ))}
         </div>
-      )}
+
+        <div className="mt-4 pt-4 border-t border-[#1E3A2C]/60">
+          <Link
+            href={localePath(locale, "/contact")}
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full inline-flex items-center justify-center font-bold text-sm py-3 px-5 rounded-[22px] bg-[#4ADE80] !text-[#062011] transition-all text-center cursor-pointer"
+          >
+            Hire Me
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }

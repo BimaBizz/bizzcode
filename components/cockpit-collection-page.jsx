@@ -457,7 +457,7 @@ export default function CockpitCollectionPage({ page, locale, latestProjects = [
                       href={route}
                       className="group block col-span-1 md:col-span-2 focus:outline-none flex"
                     >
-                      <article className="w-full h-full flex flex-col md:flex-row overflow-hidden rounded-tr-[30px] rounded-bl-[30px] rounded-tl-[10px] rounded-br-[10px] border border-[#1E3A2C] bg-[#0F221A] shadow-lg transition-all duration-450 ease-[cubic-bezier(.34,1.56,.64,1)] hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:rounded-tr-[10px] hover:rounded-bl-[10px] hover:-translate-y-1">
+                      <article className="w-full h-full flex flex-col-reverse md:flex-row overflow-hidden rounded-tr-[30px] rounded-bl-[30px] rounded-tl-[10px] rounded-br-[10px] border border-[#1E3A2C] bg-[#0F221A] shadow-lg transition-all duration-450 ease-[cubic-bezier(.34,1.56,.64,1)] hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:rounded-tr-[10px] hover:rounded-bl-[10px] hover:-translate-y-1">
                         {/* Left Side: Content Container */}
                         <div className="p-8 sm:p-10 space-y-6 flex-1 flex flex-col justify-between text-[#EAF6EF] w-full md:w-1/2">
                           <div className="space-y-4">
