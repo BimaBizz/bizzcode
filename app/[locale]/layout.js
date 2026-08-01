@@ -73,7 +73,7 @@ export default async function LocaleLayout({ children, params }) {
       <footer className="w-full px-6 py-10">
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4 border-t border-[#1E3A2C] pt-6 text-xs text-[#8FAB9C]">
           <div>
-            &copy; 2026 {settings.site_title || "BMDev"}. Built with Liquid Glass Protocol × Material 3 Expressive.
+            &copy; 2026 {settings.site_title || "BMDev"}. Built with Material 3 Expressive.
           </div>
 
           <nav className="flex flex-wrap items-center gap-6 font-semibold tracking-wider">

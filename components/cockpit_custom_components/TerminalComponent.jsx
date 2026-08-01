@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import hljs from "highlight.js";
-import "highlight.js/styles/gml.min.css";
+import "highlight.js/styles/tokyo-night-dark.min.css";
 
 const htmlToTerminalText = (html = "") =>
   String(html)
