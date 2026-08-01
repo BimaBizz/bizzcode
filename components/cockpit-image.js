@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getAssetImageUrl } from "@/lib/cockpit";
 
-export default function CockpitImage({ asset, alt, width = 1200, height = 675, className }) {
+export default function CockpitImage({ asset, alt, width = 1200, height = 675, className, priority, loading }) {
   if (!asset?._id) {
     return null;
   }
@@ -21,6 +21,8 @@ export default function CockpitImage({ asset, alt, width = 1200, height = 675, c
       width={width}
       height={height}
       className={className}
+      priority={priority}
+      loading={loading}
       unoptimized
     />
   );

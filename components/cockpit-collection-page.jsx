@@ -94,6 +94,7 @@ export default function CockpitCollectionPage({ page, locale, latestProjects = [
                                 alt={project.title || "Project image"}
                                 width={1200}
                                 height={750}
+                                priority={index < 2}
                                 className="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105"
                               />
                             ) : (
@@ -226,6 +227,7 @@ export default function CockpitCollectionPage({ page, locale, latestProjects = [
                                 alt={project.title || "Project image"}
                                 width={600}
                                 height={450}
+                                priority={index < 2}
                                 className="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105"
                               />
                             ) : (

@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontHeading.variable} ${fontMono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${fontSans.variable} ${fontHeading.variable} ${fontMono.variable}`}>
       <body className="antialiased min-h-screen bg-[#081410] text-[#EAF6EF] dark" suppressHydrationWarning>
         {/* Animated Ambient Background Blobs from contoh.html */}
         <div className="blob blob1"></div>

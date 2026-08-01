@@ -33,14 +33,13 @@ export default async function ProjectsItemsComponent({ data, locale }) {
     return null;
   }
 
-  // Fetch all items from Cockpit in parallel using getItem helper
   const fetchedItems = await Promise.all(
     items.map(async (itemRef) => {
       if (!itemRef || !itemRef._id || !itemRef._model) return null;
       try {
         const project = await getItem(itemRef._model, itemRef._id, {
           locale,
-          populate: 1, // Resolve linked content items (like projects_type)
+          populate: 1,
         });
         return project;
       } catch (err) {
@@ -75,6 +74,7 @@ export default async function ProjectsItemsComponent({ data, locale }) {
                     alt={project.title || "Project image"}
                     width={640}
                     height={400}
+                    priority={index < 2}
                     className="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 ) : (
