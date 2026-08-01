@@ -1,0 +1,15 @@
+export { default as SectionTitleComponent } from "./SectionTitleComponent";
+export { default as TagsComponent } from "./TagsComponent";
+export { default as JobTitleComponent } from "./JobTitleComponent";
+export { default as HeroImage } from "./HeroImageComponent";
+export { default as CardComponent } from "./CardComponent";
+export { default as TerminalComponent } from "./TerminalComponent";
+export { default as ProjectsItemsComponent } from "./ProjectsItemsComponent";
+export { default as MetricCardComponent } from "./MetricCardComponent";
+export { default as FormComponent } from "./FormComponent";
+export { default as CustomButtonComponent } from "./CustomButtonComponent";
+export { default as CardTechComponent } from "./CardTechComponent";
+export { default as CardDevOpsComponent } from "./CardDevOpsComponent";
+export { default as CardTagsComponent } from "./CardTagsComponent";
+export { default as CardImageComponent } from "./CardImageComponent";
+export { default as DetailContactComponent } from "./DetailContactComponent";

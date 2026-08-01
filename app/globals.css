@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans), 'Inter', sans-serif;
+  --font-heading: var(--font-heading), 'Fraunces', serif;
+  --font-serif: var(--font-heading), 'Fraunces', serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+  --color-primary: #4ADE80;
+  --color-background: #081410;
+  --color-foreground: #EAF6EF;
+}
+
+:root {
+  --primary: #4ADE80;
+  --primary-container: #0F3D24;
+  --on-primary-container: #B9F5D0;
+  --secondary: #5EEAD4;
+  --secondary-container: #0B3B36;
+  --on-secondary-container: #B0F5EC;
+  --tertiary: #FDE68A;
+  --tertiary-container: #3D3410;
+  --on-tertiary-container: #FBEFB8;
+  --surface: #081410;
+  --surface-high: #0F221A;
+  --surface-higher: #152B21;
+  --on-surface: #EAF6EF;
+  --on-surface-muted: #8FAB9C;
+  --outline: #1E3A2C;
+  --shadow-med: 0 24px 60px rgba(0,0,0,0.45);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+
+  --background: #081410;
+  --foreground: #EAF6EF;
+  --card: #0F221A;
+  --card-foreground: #EAF6EF;
+  --border: #1E3A2C;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--surface) !important;
+  color: var(--on-surface) !important;
+  font-family: var(--font-sans), 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6, .display, .font-heading, .font-serif {
+  font-family: var(--font-heading), 'Fraunces', serif !important;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.mono { font-family: var(--font-mono), 'JetBrains Mono', monospace; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+.blob {
+  position: fixed;
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  filter: blur(80px);
+  opacity: 0.22;
+  z-index: 0;
+  pointer-events: none;
+  animation: morph 18s ease-in-out infinite;
+}
+
+.blob1 {
+  width: 520px;
+  height: 520px;
+  background: var(--primary);
+  top: -160px;
+  right: -160px;
+}
+
+.blob2 {
+  width: 420px;
+  height: 420px;
+  background: var(--secondary);
+  bottom: 10%;
+  left: -140px;
+  animation-delay: -6s;
+}
+
+.blob3 {
+  width: 340px;
+  height: 340px;
+  background: var(--tertiary);
+  top: 55%;
+  right: 10%;
+  animation-delay: -12s;
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+  50% { border-radius: 63% 37% 42% 58% / 55% 59% 41% 45%; }
+}

@@ -1,45 +1,26 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    images: {
-        remotePatterns: [
-          {
-            protocol: 'https',
-            hostname: 'admin.bizzcode.site',
-            port: '',
-            pathname: '/**',
-          },
-        ],
+let remotePatterns = [];
+
+if (process.env.COCKPIT_API_URL) {
+  try {
+    const cockpitUrl = new URL(process.env.COCKPIT_API_URL);
+    remotePatterns = [
+      {
+        protocol: cockpitUrl.protocol.replace(":", ""),
+        hostname: cockpitUrl.hostname,
+        port: cockpitUrl.port,
+        pathname: "/api/assets/image/**",
       },
-    headers: async () => {
-      return [
-        {
-          source: '/:path*',
-          headers: [
-            {
-              key: 'X-Content-Type-Options',
-              value: 'nosniff',
-            },
-            {
-              key: 'X-Frame-Options',
-              value: 'DENY',
-            },
-            {
-              key: 'X-XSS-Protection',
-              value: '1; mode=block',
-            },
-            {
-              key: 'Referrer-Policy',
-              value: 'strict-origin-when-cross-origin',
-            },
-            {
-              key: 'Permissions-Policy',
-              value: 'camera=(), microphone=(), geolocation=()',
-            },
-          ],
-        },
-      ];
-    },
-    poweredByHeader: false,
+    ];
+  } catch {
+    remotePatterns = [];
+  }
+}
+
+const nextConfig = {
+  images: {
+    remotePatterns,
+  },
 };
 
 export default nextConfig;
