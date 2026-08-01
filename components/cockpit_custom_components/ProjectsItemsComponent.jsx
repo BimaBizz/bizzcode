@@ -98,7 +98,7 @@ export default async function ProjectsItemsComponent({ data, locale }) {
                   </h3>
 
                   {excerpt ? (
-                    <p className="text-xs leading-relaxed text-[#8FAB9C] line-clamp-3">
+                    <p className="text-xs leading-relaxed text-[#8FAB9C] line-clamp-3 mt-4">
                       {excerpt}
                     </p>
                   ) : null}
