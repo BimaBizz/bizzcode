@@ -638,7 +638,7 @@ export default function CockpitCollectionPage({ page, locale, latestProjects = [
           <LayoutRenderer components={detailBefore} locale={locale} />
         )}
 
-        <article className="max-w-7xl mx-auto w-full px-5 py-12 space-y-10">
+        <article className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-10 min-w-0">
           {/* Breadcrumb / Back button */}
           <div>
             <Link
@@ -663,13 +663,13 @@ export default function CockpitCollectionPage({ page, locale, latestProjects = [
           </div>
 
           {/* Hero Header */}
-          <div className="space-y-4">
+          <div className="space-y-4 min-w-0">
             {typeName && (
               <span className="inline-block rounded-full border border-[#1E3A2C] bg-[#0F3D24] px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-[#B9F5D0]">
                 {typeName}
               </span>
             )}
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium capitalize tracking-tight text-[#EAF6EF] leading-tight">
+            <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-medium capitalize tracking-tight text-[#EAF6EF] leading-tight break-words">
               {item.title || page.title || "Untitled Project"}
             </h1>
           </div>
@@ -680,18 +680,18 @@ export default function CockpitCollectionPage({ page, locale, latestProjects = [
           )}
 
           {/* Two-Column Details Breakdown */}
-          <div className="grid gap-12 lg:grid-cols-3 pt-4">
+          <div className="grid gap-8 lg:gap-12 lg:grid-cols-3 pt-4 min-w-0">
             {/* Left Column: Description */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6 min-w-0 w-full">
               <HighlightedHtml
-                className="prose prose-invert max-w-none prose-headings:font-heading prose-headings:font-bold prose-headings:text-[#EAF6EF] prose-p:leading-relaxed prose-p:text-[#8FAB9C] prose-a:text-[#4ADE80] hover:prose-a:text-[#5EEAD4]"
+                className="prose prose-invert max-w-none w-full min-w-0 break-words [overflow-wrap:anywhere] prose-headings:font-heading prose-headings:font-bold prose-headings:text-[#EAF6EF] prose-headings:break-words prose-p:leading-relaxed prose-p:text-[#8FAB9C] prose-p:break-words prose-a:text-[#4ADE80] hover:prose-a:text-[#5EEAD4] prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:rounded-2xl"
                 html={item.contents || ""}
               />
             </div>
 
             {/* Right Column: Metadata Sidebar */}
-            <div className="space-y-6">
-              <div className="rounded-tr-[28px] rounded-bl-[28px] rounded-tl-[8px] rounded-br-[8px] border border-[#1E3A2C] bg-[#0F221A] p-6 sm:p-8 space-y-6 shadow-lg">
+            <div className="space-y-6 min-w-0 w-full">
+              <div className="rounded-tr-[28px] rounded-bl-[28px] rounded-tl-[8px] rounded-br-[8px] border border-[#1E3A2C] bg-[#0F221A] p-5 sm:p-8 space-y-6 shadow-lg min-w-0">
                 <h3 className="font-heading text-lg font-bold text-[#EAF6EF] tracking-tight">
                   Project Information
                 </h3>

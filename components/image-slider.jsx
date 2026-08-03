@@ -37,7 +37,7 @@ export default function ImageSlider({ images }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-lg group"
+      className="relative aspect-[16/10] sm:aspect-[21/9] w-full overflow-hidden rounded-3xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-lg group"
     >
       {/* Slides */}
       <div className="relative w-full h-full">
