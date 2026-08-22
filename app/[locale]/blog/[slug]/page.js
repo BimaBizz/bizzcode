@@ -5,6 +5,10 @@ import { LOCALES } from "@/config/cockpit";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/cockpit-queries";
 import { isSupportedLocale } from "@/lib/i18n";
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 export async function generateStaticParams() {
   const allParams = await Promise.all(
     LOCALES.map(async (locale) => {
