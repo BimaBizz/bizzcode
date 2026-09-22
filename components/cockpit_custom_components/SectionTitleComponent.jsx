@@ -37,6 +37,6 @@ export default function SectionTitleComponent({ data }) {
           <span key={`${part}-${index}`}>{part}</span>
         )
       ))}
-    </h2>
+    </Tag>
   );
 }
