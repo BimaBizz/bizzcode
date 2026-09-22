@@ -16,8 +16,10 @@ export default function SectionTitleComponent({ data }) {
 
   if (!title) return null;
 
+  const Tag = data?.as === "h1" || data?.level === 1 || data?.tag === "h1" || data?.isH1 ? "h1" : "h2";
+
   if (!highlight) {
-    return <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold font-heading tracking-tight text-[#EAF6EF]">{title}</h2>;
+    return <Tag className="text-3xl md:text-5xl lg:text-6xl font-semibold font-heading tracking-tight text-[#EAF6EF]">{title}</Tag>;
   }
 
   const escapedHighlight = highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -25,7 +27,7 @@ export default function SectionTitleComponent({ data }) {
   const parts = title.split(regex);
 
   return (
-    <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold font-heading tracking-tight text-[#EAF6EF]">
+    <Tag className="text-3xl md:text-5xl lg:text-6xl font-semibold font-heading tracking-tight text-[#EAF6EF]">
       {parts.map((part, index) => (
         part.toLowerCase() === highlight.toLowerCase() ? (
           <em key={`${part}-${index}`} className="italic font-normal text-[#4ADE80] not-italic">

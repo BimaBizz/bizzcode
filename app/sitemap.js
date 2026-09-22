@@ -4,7 +4,7 @@ import { LOCALES, DEFAULT_LOCALE, COCKPIT_MULTI_LANGUAGE_ENABLED } from "@/confi
 export const dynamic = "force-dynamic";
 
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bmdev.co.id";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bmdev.web.id";
 
   try {
     const rawSitemap = await fetchSitemap({ deep: 3 }).catch(() => []);

@@ -25,7 +25,10 @@ export async function generateMetadata({ params }) {
     const siteSeo = settings?.seo || {};
 
     const title = pageSeo.title || homePage?.seo_title || siteSeo.title || settings?.site_title || "Cockpit Site";
-    const description = pageSeo.description || homePage?.seo_description || siteSeo.description || settings?.site_description || "Content managed from Cockpit";
+    let description = pageSeo.description || homePage?.seo_description || siteSeo.description || settings?.site_description || "Content managed from Cockpit";
+    if (typeof description === "string" && description.length > 160) {
+      description = description.slice(0, 157).trim() + "...";
+    }
     const keywords = pageSeo.keywords || siteSeo.keywords || undefined;
 
     // Resolve OG image URL
@@ -66,11 +69,16 @@ export async function generateMetadata({ params }) {
       follow: nofollow === true ? false : nofollow === false ? true : undefined,
     } : undefined;
 
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bmdev.web.id";
+
     return {
       title,
       description,
       keywords,
       robots,
+      alternates: {
+        canonical: baseUrl,
+      },
       openGraph: ogImages ? { images: ogImages } : undefined,
       icons: settings.favicon_url ? {
         icon: settings.favicon_url,

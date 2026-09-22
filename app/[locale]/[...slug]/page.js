@@ -1,5 +1,5 @@
 import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { LOCALES } from "@/config/cockpit";
 import LayoutRenderer from "@/components/layout-renderer";
 import CockpitCollectionPage from "@/components/cockpit-collection-page";
@@ -43,8 +43,14 @@ export async function generateMetadata({ params, searchParams }) {
     const pageSeo = page.seo || {};
     const siteSeo = settings?.seo || {};
 
-    const title = pageSeo.title || page.seo_title || page.title || siteSeo.title || settings?.site_title || "Cockpit Site";
-    const description = pageSeo.description || page.seo_description || page.excerpt || siteSeo.description || settings?.site_description || "Content managed from Cockpit";
+    const rawTitle = pageSeo.title || page.seo_title || page.title || siteSeo.title || settings?.site_title || "Cockpit Site";
+    const pageSuffix = pageQuery && pageQuery !== "1" ? ` (Halaman ${pageQuery})` : "";
+    const title = `${rawTitle}${pageSuffix}`;
+
+    let description = pageSeo.description || page.seo_description || page.excerpt || siteSeo.description || settings?.site_description || "Content managed from Cockpit";
+    if (typeof description === "string" && description.length > 160) {
+      description = description.slice(0, 157).trim() + "...";
+    }
     const keywords = pageSeo.keywords || siteSeo.keywords || undefined;
 
     // Resolve OG image URL
@@ -85,11 +91,17 @@ export async function generateMetadata({ params, searchParams }) {
       follow: nofollow === true ? false : nofollow === false ? true : undefined,
     } : undefined;
 
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bmdev.web.id";
+    const canonicalPath = pageQuery && pageQuery !== "1" ? `/${slugPath}?page=${pageQuery}` : `/${slugPath}`;
+
     return {
       title,
       description,
       keywords,
       robots,
+      alternates: {
+        canonical: `${baseUrl}${canonicalPath}`,
+      },
       openGraph: ogImages ? { images: ogImages } : undefined,
       icons: settings.favicon_url ? {
         icon: settings.favicon_url,
@@ -113,6 +125,12 @@ export default async function DynamicPage({ params, searchParams }) {
   const slugPath = slug.join("/");
   const resolvedSearchParams = await searchParams;
   const pageQuery = resolvedSearchParams?.page;
+
+  // Redirect page=1 to base slug to eliminate duplicate content
+  if (pageQuery === "1") {
+    permanentRedirect(`/${locale}/${slugPath}`);
+  }
+
   const page = await getPageBySlug({ locale, slug: slugPath, preview, page: pageQuery });
 
   if (!page) {
