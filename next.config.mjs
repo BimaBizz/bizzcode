@@ -18,7 +18,7 @@ if (process.env.COCKPIT_API_URL) {
 }
 
 const nextConfig = {
-  cacheComponents: true,
+  cacheComponents: false,
   images: {
     remotePatterns,
   },
