@@ -6,38 +6,42 @@
 
 @theme inline {
   --font-sans: var(--font-sans), 'Inter', sans-serif;
-  --font-heading: var(--font-heading), 'Fraunces', serif;
-  --font-serif: var(--font-heading), 'Fraunces', serif;
+  --font-heading: var(--font-sans), 'Inter', sans-serif;
   --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
-  --color-primary: #4ADE80;
-  --color-background: #081410;
-  --color-foreground: #EAF6EF;
+  --color-primary: #E8452C;
+  --color-background: #0A0A0A;
+  --color-foreground: #FAFAFA;
 }
 
 :root {
-  --primary: #4ADE80;
-  --primary-container: #0F3D24;
-  --on-primary-container: #B9F5D0;
-  --secondary: #5EEAD4;
-  --secondary-container: #0B3B36;
-  --on-secondary-container: #B0F5EC;
-  --tertiary: #FDE68A;
-  --tertiary-container: #3D3410;
-  --on-tertiary-container: #FBEFB8;
-  --surface: #081410;
-  --surface-high: #0F221A;
-  --surface-higher: #152B21;
-  --on-surface: #EAF6EF;
-  --on-surface-muted: #8FAB9C;
-  --outline: #1E3A2C;
-  --shadow-med: 0 24px 60px rgba(0,0,0,0.45);
-  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --bmdev-accent: #E8452C;
+  --bmdev-accent-hover: #D43C24;
+  --bmdev-accent-muted: rgba(232, 69, 44, 0.12);
 
-  --background: #081410;
-  --foreground: #EAF6EF;
-  --card: #0F221A;
-  --card-foreground: #EAF6EF;
-  --border: #1E3A2C;
+  --primary: #E8452C;
+  --primary-foreground: #FFFFFF;
+  --primary-container: #1F1210;
+  --on-primary-container: #FFD5CE;
+
+  --secondary: #27272A;
+  --secondary-foreground: #FAFAFA;
+
+  --surface: #0A0A0A;
+  --surface-high: #121212;
+  --surface-higher: #181818;
+  --on-surface: #FAFAFA;
+  --on-surface-muted: #A1A1AA;
+  --outline: #27272A;
+  --outline-strong: #3F3F46;
+
+  --background: #0A0A0A;
+  --foreground: #FAFAFA;
+  --card: #121212;
+  --card-hover: #181818;
+  --card-foreground: #FAFAFA;
+  --border: #27272A;
+  --muted: #181818;
+  --muted-foreground: #A1A1AA;
 }
 
 * { box-sizing: border-box; }
@@ -45,63 +49,40 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--surface) !important;
-  color: var(--on-surface) !important;
+  background: var(--background) !important;
+  color: var(--foreground) !important;
   font-family: var(--font-sans), 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
 }
 
-h1, h2, h3, h4, h5, h6, .display, .font-heading, .font-serif {
-  font-family: var(--font-heading), 'Fraunces', serif !important;
-  font-optical-sizing: auto;
-  letter-spacing: -0.01em;
+h1, h2, h3, h4, h5, h6, .display, .font-heading {
+  font-family: var(--font-sans), 'Inter', sans-serif !important;
+  letter-spacing: -0.025em;
   margin: 0;
 }
 
-.mono { font-family: var(--font-mono), 'JetBrains Mono', monospace; }
+.mono, code, pre {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+}
+
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
-.wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
-.blob {
-  position: fixed;
-  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
-  filter: blur(80px);
-  opacity: 0.22;
-  z-index: 0;
-  pointer-events: none;
-  animation: morph 18s ease-in-out infinite;
+/* BMDev Technical Details */
+.hairline-border {
+  border: 1px solid var(--border);
 }
 
-.blob1 {
-  width: 520px;
-  height: 520px;
-  background: var(--primary);
-  top: -160px;
-  right: -160px;
+.card-technical {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.blob2 {
-  width: 420px;
-  height: 420px;
-  background: var(--secondary);
-  bottom: 10%;
-  left: -140px;
-  animation-delay: -6s;
-}
-
-.blob3 {
-  width: 340px;
-  height: 340px;
-  background: var(--tertiary);
-  top: 55%;
-  right: 10%;
-  animation-delay: -12s;
-}
-
-@keyframes morph {
-  0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
-  50% { border-radius: 63% 37% 42% 58% / 55% 59% 41% 45%; }
+.card-technical:hover {
+  border-color: var(--outline-strong);
+  background-color: var(--card-hover);
 }

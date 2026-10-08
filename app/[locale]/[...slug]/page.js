@@ -174,8 +174,8 @@ export default async function DynamicPage({ params, searchParams }) {
   return (
     <article className="space-y-6">
       <header className="space-y-2">
-        <h1 className="font-heading text-4xl font-semibold tracking-tight">{page.title || slugPath}</h1>
-        {page.excerpt ? <p className="max-w-3xl text-base opacity-80">{page.excerpt}</p> : null}
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FAFAFA]">{page.title || slugPath}</h1>
+        {page.excerpt ? <p className="max-w-3xl text-sm text-[#A1A1AA] leading-relaxed">{page.excerpt}</p> : null}
       </header>
 
       <div

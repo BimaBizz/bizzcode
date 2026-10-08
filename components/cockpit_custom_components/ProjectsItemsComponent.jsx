@@ -2,7 +2,6 @@ import Link from "next/link";
 import { getItem } from "@/lib/cockpit";
 import CockpitImage from "@/components/cockpit-image";
 import { localePath } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
 
 const stripHtml = (value = "") =>
   String(value)
@@ -56,86 +55,84 @@ export default async function ProjectsItemsComponent({ data, locale }) {
   }
 
   return (
-    <>
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, index) => {
-          const typeName = project.projects_type?.type_name || project.projects_type?.title || "";
-          const excerpt = shortText(project.contents || "");
-          const route = project.slug ? localePath(locale, `projects/${project.slug}`) : "";
-          const techs = Array.isArray(project.tech) ? project.tech : [];
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project, index) => {
+        const typeName = project.projects_type?.type_name || project.projects_type?.title || "";
+        const excerpt = shortText(project.contents || "");
+        const route = project.slug ? localePath(locale, `projects/${project.slug}`) : "";
+        const techs = Array.isArray(project.tech) ? project.tech : [];
 
-          const cardContent = (
-            <article className="group h-full flex flex-col overflow-hidden rounded-tr-[30px] rounded-bl-[30px] rounded-tl-[10px] rounded-br-[10px] border border-[#1E3A2C] bg-[#0F221A] shadow-lg transition-all duration-450 ease-[cubic-bezier(.34,1.56,.64,1)] hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:rounded-tr-[10px] hover:rounded-bl-[10px] hover:-translate-y-1">
-              {/* Image Container */}
-              <div className="relative aspect-16/10 w-full overflow-hidden bg-[#081410]">
-                {getSingleImageAsset(project.image) ? (
-                  <CockpitImage
-                    asset={getSingleImageAsset(project.image)}
-                    alt={project.title || "Project image"}
-                    width={640}
-                    height={400}
-                    priority={index < 2}
-                    className="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-[#081410] text-xs font-semibold text-[#8FAB9C]">
-                    No preview image
-                  </div>
-                )}
-
-                {typeName ? (
-                  <div className="absolute right-3 top-3 rounded-[16px] bg-[#0B3B36] text-[#B0F5EC] px-3.5 py-1 text-[11px] font-bold tracking-wide backdrop-blur-md">
-                    {typeName}
-                  </div>
-                ) : null}
-              </div>
-
-              {/* Text Container */}
-              <div className="flex-1 flex flex-col justify-between p-6 space-y-4">
-                <div className="space-y-2.5">
-                  <h3 className="font-heading text-xl font-semibold tracking-tight text-[#EAF6EF] transition-colors duration-300 group-hover:text-[#4ADE80]">
-                    {project.title || "Untitled Project"}
-                  </h3>
-
-                  {excerpt ? (
-                    <p className="text-xs leading-relaxed text-[#8FAB9C] line-clamp-3 mt-4">
-                      {excerpt}
-                    </p>
-                  ) : null}
+        const cardContent = (
+          <article className="group h-full flex flex-col overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] hover:border-[#3F3F46] shadow-lg transition-colors">
+            {/* Image Container */}
+            <div className="relative aspect-16/10 w-full overflow-hidden bg-[#0A0A0A]">
+              {getSingleImageAsset(project.image) ? (
+                <CockpitImage
+                  asset={getSingleImageAsset(project.image)}
+                  alt={project.title || "Project image"}
+                  width={640}
+                  height={400}
+                  priority={index < 2}
+                  className="h-full w-full object-cover opacity-90 transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-[#0A0A0A] text-xs font-mono text-[#71717A]">
+                  No preview image
                 </div>
+              )}
 
-                {/* Tech Badges */}
-                {techs.length ? (
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {techs.map((tech, techIdx) => (
-                      <span
-                        key={`${tech}-${techIdx}`}
-                        className="font-mono text-[10.5px] bg-[#0B3B36] text-[#B0F5EC] px-2.5 py-1 rounded-[6px] uppercase"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              {typeName ? (
+                <div className="absolute right-3 top-3 rounded-md bg-[#121212]/90 border border-[#27272A] text-[#FAFAFA] px-2.5 py-1 text-[11px] font-mono backdrop-blur-md">
+                  {typeName}
+                </div>
+              ) : null}
+            </div>
+
+            {/* Content Container */}
+            <div className="flex-1 flex flex-col justify-between p-5 space-y-3">
+              <div className="space-y-2">
+                <h3 className="text-lg font-bold tracking-tight text-[#FAFAFA] transition-colors group-hover:text-[#E8452C]">
+                  {project.title || "Untitled Project"}
+                </h3>
+
+                {excerpt ? (
+                  <p className="text-xs leading-relaxed text-[#A1A1AA] line-clamp-3">
+                    {excerpt}
+                  </p>
                 ) : null}
               </div>
-            </article>
-          );
 
-          return route ? (
-            <Link
-              key={project._id || `project-${index}`}
-              href={route}
-              className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              {cardContent}
-            </Link>
-          ) : (
-            <div key={project._id || `project-${index}`} className="h-full">
-              {cardContent}
+              {/* Tech Badges */}
+              {techs.length ? (
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {techs.map((tech, techIdx) => (
+                    <span
+                      key={`${tech}-${techIdx}`}
+                      className="font-mono text-[10px] bg-[#181818] text-[#FAFAFA] border border-[#27272A] px-2 py-0.5 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
             </div>
-          );
-        })}
-      </div>
-    </>
+          </article>
+        );
+
+        return route ? (
+          <Link
+            key={project._id || `project-${index}`}
+            href={route}
+            className="group block h-full focus:outline-none"
+          >
+            {cardContent}
+          </Link>
+        ) : (
+          <div key={project._id || `project-${index}`} className="h-full">
+            {cardContent}
+          </div>
+        );
+      })}
+    </div>
   );
 }

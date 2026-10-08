@@ -9,17 +9,17 @@ export default function CardTagsComponent({ data }) {
   const cta = data.cta || {};
 
   return (
-    <article className="w-full h-full bg-[#0F221A] border border-[#1E3A2C] rounded-[28px] p-8 md:p-10 shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+    <article className="w-full h-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between">
       <div>
         {/* Header */}
-        <div className="flex flex-col mb-6">
+        <div className="flex flex-col mb-5">
           {title && (
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold tracking-tight text-[#EAF6EF] mt-2">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
               {title}
             </h3>
           )}
           {subTitle && (
-            <p className="text-[#8FAB9C] text-sm md:text-[0.95rem] mt-2 font-normal">
+            <p className="text-[#A1A1AA] text-xs leading-relaxed mt-1 font-normal">
               {subTitle}
             </p>
           )}
@@ -27,13 +27,13 @@ export default function CardTagsComponent({ data }) {
 
         {/* Tags */}
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2.5 mt-6 mb-8">
+          <div className="flex flex-wrap gap-2 mt-4 mb-6">
             {tags.map((tag, index) => {
               if (typeof tag !== "string" || !tag.trim()) return null;
               return (
                 <span
                   key={index}
-                  className="bg-[#0B3B36] text-[#B0F5EC] border border-[#1E3A2C]/60 font-mono text-xs tracking-wider uppercase px-3 py-1.5 rounded-[12px] font-medium"
+                  className="bg-[#181818] text-[#FAFAFA] border border-[#27272A] font-mono text-xs px-2.5 py-1 rounded-md"
                 >
                   {tag.trim()}
                 </span>
@@ -48,10 +48,10 @@ export default function CardTagsComponent({ data }) {
         <div className="mt-auto pt-4">
           <Link
             href={cta.link || "#"}
-            className="inline-flex items-center gap-1.5 text-sm md:text-[0.95rem] font-bold text-[#4ADE80] hover:text-[#5EEAD4] transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#E8452C] hover:text-[#d43c24] transition-colors"
           >
             <span>{cta.caption}</span>
-            <span className="text-lg leading-none transform translate-y-[0.5px]">→</span>
+            <span className="text-sm">→</span>
           </Link>
         </div>
       )}

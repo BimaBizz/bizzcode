@@ -26,7 +26,7 @@ export default function HighlightedHtml({ html, className }) {
         pre.classList.add("relative", "group");
 
         const button = document.createElement("button");
-        button.className = "copy-btn absolute top-3 right-3 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-200 bg-zinc-900/90 hover:bg-[#138024] text-zinc-400 hover:text-white px-2.5 py-1 text-[10px] font-bold rounded-lg border border-zinc-800 hover:border-[#138024]/50 backdrop-blur-md cursor-pointer z-10 flex items-center gap-1.5 shadow-sm";
+        button.className = "copy-btn absolute top-3 right-3 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-200 bg-[#181818]/90 hover:bg-[#E8452C] text-[#A1A1AA] hover:text-white px-2.5 py-1 text-[10px] font-mono font-medium rounded-md border border-[#27272A] hover:border-[#E8452C] backdrop-blur-md cursor-pointer z-10 flex items-center gap-1.5 shadow-sm";
         button.type = "button";
         
         const copyIcon = `<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" /></svg>`;

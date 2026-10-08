@@ -1,13 +1,9 @@
-import { cn } from "@/lib/utils";
-
-
-
 export default function CardTechComponent({ data }) {
   if (!data) return null;
 
   const header = data.header || {};
   const body = data.body || {};
-  const rows = data.body.rows;
+  const rows = data.body?.rows;
   const getColsClass = rows === 1 ? "md:grid-cols-1" : rows === 2 ? "md:grid-cols-2" : rows === 3 ? "md:grid-cols-3" : rows === 4 ? "md:grid-cols-4" : "md:grid-cols-3";
 
   const footerHtml = data.footer || "";
@@ -16,11 +12,9 @@ export default function CardTechComponent({ data }) {
   const headerTitle = typeof header.title === "string" ? header.title : "";
   const items = Array.isArray(body.items) ? body.items : [];
 
-  // Parse terminal text from HTML footer
   const renderTerminalContent = (html) => {
     if (!html) return null;
 
-    // Remove pre/code tags and trim
     const cleanText = html
       .replace(/<pre><code>/gi, "")
       .replace(/<\/code><\/pre>/gi, "")
@@ -30,47 +24,30 @@ export default function CardTechComponent({ data }) {
     const lines = cleanText.split("\n");
 
     return (
-      <div className="space-y-1 font-mono text-xs md:text-[0.9rem] leading-relaxed tracking-normal">
+      <div className="space-y-1 font-mono text-xs leading-relaxed">
         {lines.map((line, index) => {
           const trimmed = line.trim();
 
-          // Command line
           if (trimmed.startsWith("$")) {
             const command = trimmed.substring(1).trim();
             return (
-              <div key={index} className="text-[#4ade80]">
-                <span className="text-[#a3a3a3] select-none mr-2">$</span>
+              <div key={index} className="text-[#FAFAFA]">
+                <span className="text-[#E8452C] select-none mr-2 font-bold">$</span>
                 {command}
               </div>
             );
           }
 
-          // Line containing checkmark (✓ Hydration)
-          if (line.includes("✓ Hydration")) {
-            const parts = line.split("✓ Hydration");
+          if (line.includes("✓ Hydration") || line.includes("complete.")) {
             return (
-              <div key={index} className="flex flex-wrap items-center">
-                <span className="text-[#8c8c8c] mr-2">{parts[0]}</span>
-                <span className="text-[#4ade80] flex items-center gap-1 font-semibold">
-                  ✓ Hydration
-                </span>
-                {parts[1] && <span className="text-[#4ade80] ml-1">{parts[1]}</span>}
-              </div>
-            );
-          }
-
-          // Complete / render cycle line
-          if (line.includes("complete. Render cycle:")) {
-            return (
-              <div key={index} className="text-[#4ade80]">
+              <div key={index} className="text-[#22C55E]">
                 {line}
               </div>
             );
           }
 
-          // Standard output line
           return (
-            <div key={index} className="text-[#8c8c8c]">
+            <div key={index} className="text-[#A1A1AA]">
               {line}
             </div>
           );
@@ -80,7 +57,7 @@ export default function CardTechComponent({ data }) {
   };
 
   return (
-    <article className="w-full h-full bg-[#0F221A] border border-[#1E3A2C] rounded-[28px] p-8 md:p-10 shadow-xl transition-all duration-300 flex flex-col justify-between">
+    <article className="w-full h-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between">
       <style dangerouslySetInnerHTML={{
         __html: `
         .tech-card-icon svg {
@@ -91,15 +68,15 @@ export default function CardTechComponent({ data }) {
       `}} />
       <div>
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-3.5 mb-6">
           {headerIcon && (
             <div
-              className="h-12 w-12 flex items-center justify-center p-2.5 rounded-2xl bg-[#0F3D24] text-[#4ADE80] border border-[#1E3A2C] tech-card-icon"
+              className="h-10 w-10 flex items-center justify-center p-2 rounded-lg bg-[#181818] text-[#FAFAFA] border border-[#27272A] tech-card-icon"
               dangerouslySetInnerHTML={{ __html: headerIcon }}
             />
           )}
           {headerTitle && (
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold tracking-tight text-[#EAF6EF]">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
               {headerTitle}
             </h3>
           )}
@@ -107,7 +84,7 @@ export default function CardTechComponent({ data }) {
 
         {/* Body Items */}
         {items.length > 0 && (
-          <div className={`grid grid-cols-1 ${getColsClass} gap-8 md:gap-4 mb-8 flex-1`}>
+          <div className={`grid grid-cols-1 ${getColsClass} gap-6 md:gap-4 mb-6 flex-1`}>
             {items.map((item, index) => {
               const num = String(index + 1).padStart(2, "0");
               const itemTitle = typeof item.title === "string" ? item.title : "";
@@ -115,16 +92,16 @@ export default function CardTechComponent({ data }) {
 
               return (
                 <div key={index} className="flex flex-col">
-                  <span className="text-xs font-mono font-bold text-[#4ADE80] tracking-wider">
+                  <span className="text-xs font-mono font-bold text-[#E8452C] tracking-wider">
                     {num}
                   </span>
                   {itemTitle && (
-                    <h4 className="text-lg md:text-xl font-bold text-[#EAF6EF] mt-1.5 tracking-tight font-heading">
+                    <h4 className="text-base font-bold text-[#FAFAFA] mt-1 tracking-tight">
                       {itemTitle}
                     </h4>
                   )}
                   {itemSubTitle && (
-                    <p className="text-[#8FAB9C] text-xs md:text-sm leading-relaxed mt-2 font-normal">
+                    <p className="text-[#A1A1AA] text-xs leading-relaxed mt-1 font-normal">
                       {itemSubTitle}
                     </p>
                   )}
@@ -137,15 +114,12 @@ export default function CardTechComponent({ data }) {
 
       {/* Footer Terminal */}
       {footerHtml && (
-        <div className="bg-[#04100A] border border-[#1E3A2C] rounded-[20px] p-5 md:p-6 shadow-inner select-text">
-          {/* Terminal Window Dots */}
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+        <div className="bg-[#080808] border border-[#27272A] rounded-lg p-4 shadow-inner select-text">
+          <div className="flex items-center gap-1.5 mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#3F3F46]" />
+            <span className="w-2 h-2 rounded-full bg-[#3F3F46]" />
+            <span className="w-2 h-2 rounded-full bg-[#3F3F46]" />
           </div>
-
-          {/* Terminal Output */}
           {renderTerminalContent(footerHtml)}
         </div>
       )}

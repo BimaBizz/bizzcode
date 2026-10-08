@@ -47,10 +47,10 @@ export default async function BlogDetailPage({ params }) {
   }
 
   return (
-    <article className="space-y-6">
+    <article className="space-y-6 max-w-4xl mx-auto px-4 py-8">
       <header className="space-y-3">
-        <h1 className="font-heading text-4xl font-semibold tracking-tight">{post.title}</h1>
-        {post.excerpt ? <p className="max-w-3xl text-base opacity-80">{post.excerpt}</p> : null}
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FAFAFA]">{post.title}</h1>
+        {post.excerpt ? <p className="max-w-3xl text-sm text-[#A1A1AA] leading-relaxed">{post.excerpt}</p> : null}
       </header>
 
       <CockpitImage

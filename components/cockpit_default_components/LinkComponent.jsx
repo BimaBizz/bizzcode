@@ -10,7 +10,7 @@ const toLocalHref = (url, locale) => {
 export default function LinkComponent({ data, locale }) {
   const href = toLocalHref(data.url, locale);
   return (
-    <Link href={href} target={data.target || "_self"} className="underline underline-offset-4">
+    <Link href={href} target={data.target || "_self"} className="underline underline-offset-4 text-[#E8452C] hover:text-[#d43c24] font-medium transition-colors">
       {data.caption || href}
     </Link>
   );

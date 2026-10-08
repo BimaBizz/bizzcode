@@ -2,12 +2,6 @@
  * SectionTitleComponent
  * 
  * Renders a section title with optional text highlighting.
- * 
- * Data structure:
- * {
- *   title: string      - Main heading text
- *   highlight: string  - Text to highlight (optional)
- * }
  */
 
 export default function SectionTitleComponent({ data }) {
@@ -19,7 +13,11 @@ export default function SectionTitleComponent({ data }) {
   const Tag = data?.as === "h1" || data?.level === 1 || data?.tag === "h1" || data?.isH1 ? "h1" : "h2";
 
   if (!highlight) {
-    return <Tag className="text-3xl md:text-5xl lg:text-6xl font-semibold font-heading tracking-tight text-[#EAF6EF]">{title}</Tag>;
+    return (
+      <Tag className="text-3xl md:text-5xl font-bold tracking-tight text-[#FAFAFA]">
+        {title}
+      </Tag>
+    );
   }
 
   const escapedHighlight = highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -27,10 +25,10 @@ export default function SectionTitleComponent({ data }) {
   const parts = title.split(regex);
 
   return (
-    <Tag className="text-3xl md:text-5xl lg:text-6xl font-semibold font-heading tracking-tight text-[#EAF6EF]">
+    <Tag className="text-3xl md:text-5xl font-bold tracking-tight text-[#FAFAFA]">
       {parts.map((part, index) => (
         part.toLowerCase() === highlight.toLowerCase() ? (
-          <em key={`${part}-${index}`} className="italic font-normal text-[#4ADE80] not-italic">
+          <em key={`${part}-${index}`} className="text-[#E8452C] not-italic font-semibold">
             {part}
           </em>
         ) : (

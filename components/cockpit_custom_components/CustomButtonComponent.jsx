@@ -9,9 +9,9 @@ const toLocalHref = (url, locale) => {
 };
 
 const getContrastColor = (hexColor) => {
-  if (!hexColor) return "#000000";
+  if (!hexColor) return "#ffffff";
   const hex = hexColor.replace("#", "");
-  if (hex.length !== 6 && hex.length !== 3) return "#000000";
+  if (hex.length !== 6 && hex.length !== 3) return "#ffffff";
 
   let r, g, b;
   if (hex.length === 6) {
@@ -33,7 +33,7 @@ export default function CustomButtonComponent({ data, locale, className }) {
   const caption = data?.caption || "";
   const target = data?.target || "_self";
   const modelColors = data?.colors?.modelColors || "solid";
-  const type_1 = data?.colors?.type_1 || "#000000";
+  const type_1 = data?.colors?.type_1 || "#E8452C";
   const type_2 = data?.colors?.type_2 || null;
 
   const href = toLocalHref(url, locale);
@@ -55,8 +55,8 @@ export default function CustomButtonComponent({ data, locale, className }) {
       target={target}
       style={style}
       className={cn(
-        "inline-flex items-center justify-center font-bold px-7 py-4 rounded-[22px] hover:rounded-[10px] text-sm shadow-md transition-all duration-350 ease-[cubic-bezier(.34,1.56,.64,1)] text-center hover:scale-[1.04] active:scale-[0.97] mr-4 w-fit",
-        isWhiteBackground && "border border-[#1E3A2C] mr-4 w-fit",
+        "inline-flex items-center justify-center font-medium px-5 py-2.5 rounded-lg text-xs shadow-sm transition-all duration-200 text-center hover:opacity-90 active:scale-95 mr-3 w-fit",
+        isWhiteBackground && "border border-[#27272A]",
         className
       )}
     >

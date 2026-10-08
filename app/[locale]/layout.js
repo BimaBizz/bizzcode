@@ -75,20 +75,22 @@ export default async function LocaleLayout({ children, params }) {
         {children}
       </main>
       <ChatBubble />
-      <footer className="w-full px-6 py-10">
-        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4 border-t border-[#1E3A2C] pt-6 text-xs text-[#8FAB9C]">
-          <div>
-            &copy; 2026 {settings.site_title || "BMDev"}. Built with Material 3 Expressive.
+      <footer className="w-full px-6 py-12 mt-16 border-t border-[#27272A]/80">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#A1A1AA]">
+          <div className="flex items-center gap-2">
+            <span>&copy; {new Date().getFullYear()} {settings.site_title || "BMDev"}.</span>
+            <span className="text-[#3F3F46]">/</span>
+            <span className="font-mono text-[#71717A]">Fullstack Web Developer</span>
           </div>
 
-          <nav className="flex flex-wrap items-center gap-6 font-semibold tracking-wider">
+          <nav className="flex flex-wrap items-center gap-6 font-mono text-[11px] tracking-wider">
             {socialItems.map(({ label, href }) => (
               <a
                 key={label}
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                className="hover:text-[#4ADE80] transition-colors uppercase"
+                className="text-[#A1A1AA] hover:text-[#E8452C] transition-colors uppercase"
               >
                 {label}
               </a>

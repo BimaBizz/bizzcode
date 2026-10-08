@@ -109,22 +109,23 @@ export default function TerminalComponent({ data }) {
   }
 
   return (
-    <section className="h-130 flex flex-col overflow-hidden rounded-tr-[30px] rounded-bl-[30px] rounded-tl-[8px] rounded-br-[8px] border border-[#1E3A2C] bg-[#04100A] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-      <div className="flex items-center justify-between gap-2 border-b border-white/5 px-4 py-3 bg-white/[0.03]">
+    <section className="h-130 flex flex-col overflow-hidden rounded-xl border border-[#27272A] bg-[#0D0D10] shadow-2xl">
+      <div className="flex items-center justify-between border-b border-[#27272A] px-4 py-2.5 bg-[#181818]">
         <div className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" aria-hidden="true" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" aria-hidden="true" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" aria-hidden="true" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" aria-hidden="true" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" aria-hidden="true" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" aria-hidden="true" />
         </div>
-        <span className="ml-3 font-mono text-xs tracking-wide text-[#8FAB9C]">zsh — 80x24</span>
+        <span className="font-mono text-xs tracking-wide text-[#71717A]">bmdev@terminal:~/init</span>
+        <div className="w-10" />
       </div>
 
-      <div className="terminal-content flex-1 overflow-x-auto overflow-y-auto p-6 font-mono text-sm leading-8 text-[#4ADE80]">
+      <div className="terminal-content flex-1 overflow-x-auto overflow-y-auto p-6 font-mono text-xs sm:text-sm leading-relaxed text-[#FAFAFA]">
         <pre className="whitespace-pre-wrap wrap-break-word">
           <code className="hljs">
             <span dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
-            <span className={`terminal-cursor ml-0.5 inline-block ${isTyping ? "text-[#4ADE80]" : "text-[#4ADE80]"}`}>
-              <span className="ml-1 block h-1.5 w-3 bg-[#4ADE80]" />
+            <span className="terminal-cursor ml-1 inline-block align-middle">
+              <span className="block h-4 w-2 bg-[#E8452C]" />
             </span>
           </code>
         </pre>
@@ -132,7 +133,7 @@ export default function TerminalComponent({ data }) {
 
       <style jsx>{`
         .terminal-cursor {
-          animation: terminal-cursor-blink 1s steps(1, end) infinite;
+          animation: terminal-cursor-blink 1.1s steps(1) infinite;
         }
 
         :global(.hljs) {
@@ -141,12 +142,10 @@ export default function TerminalComponent({ data }) {
         }
 
         @keyframes terminal-cursor-blink {
-          0%,
-          49% {
+          0%, 49% {
             opacity: 1;
           }
-          50%,
-          100% {
+          50%, 100% {
             opacity: 0;
           }
         }

@@ -9,7 +9,7 @@ export default function CardComponent({ data }) {
   const imagePath = imageData?.img?.path || imageData?.img?.url || "";
 
   return (
-    <article className="rounded-tr-[28px] rounded-bl-[28px] rounded-tl-[8px] rounded-br-[8px] bg-[#0F221A] border border-[#1E3A2C] p-6 md:p-8 shadow-lg">
+    <article className="rounded-xl bg-[#121212] border border-[#27272A] hover:border-[#3F3F46] p-6 md:p-8 shadow-xl transition-colors">
       {!isImageHidden && imagePath ? (
         <Image
           src={imagePath}
@@ -21,8 +21,8 @@ export default function CardComponent({ data }) {
         />
       ) : null}
 
-      {title ? <h3 className="font-heading text-2xl md:text-3xl font-semibold text-[#EAF6EF] tracking-tight leading-snug">{title}</h3> : null}
-      {subTitle ? <p className="mt-2 text-xs uppercase font-bold tracking-wider text-[#8FAB9C]">{subTitle}</p> : null}
+      {title ? <h3 className="text-xl md:text-2xl font-bold text-[#FAFAFA] tracking-tight leading-snug">{title}</h3> : null}
+      {subTitle ? <p className="mt-2 text-xs uppercase font-mono font-medium tracking-wider text-[#A1A1AA]">{subTitle}</p> : null}
     </article>
   );
 }

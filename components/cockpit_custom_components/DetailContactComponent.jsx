@@ -6,7 +6,7 @@ export default function DetailContactComponent({ data }) {
   const subTitle = typeof data.subTitle === "string" ? data.subTitle : "";
 
   return (
-    <div className="flex items-center gap-4 py-2 select-text">
+    <div className="flex items-center gap-3.5 py-2 select-text">
       <style dangerouslySetInnerHTML={{
         __html: `
         .detail-contact-icon svg {
@@ -19,7 +19,7 @@ export default function DetailContactComponent({ data }) {
       {/* Icon Container */}
       {iconHtml && (
         <div
-          className="h-12 w-12 flex items-center justify-center p-2.5 rounded-2xl bg-[#0F3D24] text-[#4ADE80] border border-[#1E3A2C] detail-contact-icon"
+          className="h-10 w-10 shrink-0 flex items-center justify-center p-2 rounded-lg bg-[#181818] text-[#E8452C] border border-[#27272A] detail-contact-icon"
           dangerouslySetInnerHTML={{ __html: iconHtml }}
         />
       )}
@@ -27,12 +27,12 @@ export default function DetailContactComponent({ data }) {
       {/* Text Container */}
       <div className="flex flex-col">
         {title && (
-          <span className="text-xs font-bold text-[#4ADE80] font-mono tracking-widest uppercase">
+          <span className="text-[11px] font-semibold text-[#A1A1AA] font-mono tracking-wider uppercase">
             {title}
           </span>
         )}
         {subTitle && (
-          <h4 className="font-heading text-lg md:text-xl font-bold tracking-tight text-[#EAF6EF] mt-1 leading-tight">
+          <h4 className="text-sm sm:text-base font-semibold tracking-tight text-[#FAFAFA] mt-0.5 leading-tight">
             {subTitle}
           </h4>
         )}

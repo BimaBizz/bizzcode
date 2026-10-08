@@ -24,23 +24,23 @@ export default async function BlogPage({ params }) {
   const posts = await getLatestPosts({ locale, preview, limit: 24 });
 
   return (
-    <section className="space-y-6">
-      <h1 className="font-heading text-3xl font-semibold tracking-tight">Blog</h1>
+    <section className="space-y-6 max-w-7xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold tracking-tight text-[#FAFAFA]">Blog</h1>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {posts.map((post) => (
-          <article key={post._id} className="overflow-hidden rounded-tr-[28px] rounded-bl-[28px] rounded-tl-[8px] rounded-br-[8px] border border-[#1E3A2C] bg-[#0F221A] p-6 shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <article key={post._id} className="overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] p-5 shadow-lg transition-colors hover:border-[#3F3F46]">
             <CockpitImage
               asset={post.featured_image}
               alt={post.title}
               width={640}
               height={360}
-              className="h-44 w-full object-cover"
+              className="h-44 w-full object-cover rounded-lg"
             />
-            <div className="space-y-2 p-5">
-              <h2 className="font-heading text-xl font-semibold tracking-tight">
+            <div className="space-y-2 pt-4">
+              <h2 className="text-lg font-bold tracking-tight text-[#FAFAFA] hover:text-[#E8452C] transition-colors">
                 <Link href={localePath(locale, `blog/${post.slug}`)}>{post.title}</Link>
               </h2>
-              {post.excerpt ? <p className="text-sm opacity-80">{post.excerpt}</p> : null}
+              {post.excerpt ? <p className="text-xs text-[#A1A1AA] leading-relaxed line-clamp-3">{post.excerpt}</p> : null}
             </div>
           </article>
         ))}

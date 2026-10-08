@@ -45,7 +45,7 @@ export default function CardDevOpsComponent({ data }) {
   const imageAlt = image?.title || image?.altText || "DevOps network image";
 
   return (
-    <article className="w-full h-full bg-[#0F221A] border border-[#1E3A2C] rounded-[28px] p-8 md:p-10 shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+    <article className="w-full h-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between">
       <style dangerouslySetInnerHTML={{
         __html: `
         .devops-card-icon svg {
@@ -57,15 +57,15 @@ export default function CardDevOpsComponent({ data }) {
 
       <div>
         {/* Header */}
-        <div className="flex flex-col items-start gap-4 mb-6">
+        <div className="flex flex-col items-start gap-3.5 mb-6">
           {headerIcon && (
             <div
-              className="h-12 w-12 flex items-center justify-center p-2.5 rounded-2xl bg-[#0F3D24] text-[#4ADE80] border border-[#1E3A2C] devops-card-icon"
+              className="h-10 w-10 flex items-center justify-center p-2 rounded-lg bg-[#181818] text-[#FAFAFA] border border-[#27272A] devops-card-icon"
               dangerouslySetInnerHTML={{ __html: headerIcon }}
             />
           )}
           {headerTitle && (
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold tracking-tight text-[#EAF6EF] mt-2">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
               {headerTitle}
             </h3>
           )}
@@ -82,22 +82,22 @@ export default function CardDevOpsComponent({ data }) {
               return (
                 <div
                   key={index}
-                  className="flex flex-col border-b border-[#1E3A2C] pb-5 mb-5 last:border-b-0 last:pb-0 last:mb-0"
+                  className="flex flex-col border-b border-[#27272A] pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
                 >
                   <div className="flex justify-between items-baseline">
                     {title && (
-                      <h4 className="font-heading text-lg font-bold text-[#EAF6EF] tracking-tight">
+                      <h4 className="text-sm font-semibold text-[#FAFAFA] tracking-tight">
                         {title}
                       </h4>
                     )}
                     {percent !== "" && (
-                      <span className="text-base md:text-lg font-mono font-bold text-[#4ADE80]">
+                      <span className="text-sm font-mono font-bold text-[#FAFAFA]">
                         {percent}%
                       </span>
                     )}
                   </div>
                   {subTitle && (
-                    <p className="text-[#8FAB9C] text-sm md:text-base mt-1 font-normal">
+                    <p className="text-[#A1A1AA] text-xs mt-1 font-normal">
                       {subTitle}
                     </p>
                   )}
@@ -110,19 +110,19 @@ export default function CardDevOpsComponent({ data }) {
 
       {/* Footer Image */}
       {image && (
-        <div className="w-full overflow-hidden rounded-[20px] border border-[#1E3A2C] mt-4">
+        <div className="w-full overflow-hidden rounded-lg border border-[#27272A] mt-4">
           {image.path ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={asAssetUrl(image.path)}
               alt={imageAlt}
-              className="w-full h-auto object-cover opacity-90 transition-transform duration-500 hover:scale-105"
+              className="w-full h-auto object-cover opacity-90 transition-transform duration-300 hover:scale-105"
             />
           ) : image._id ? (
             <CockpitImage
               asset={image}
               alt={imageAlt}
-              className="w-full h-auto object-cover opacity-90 transition-transform duration-500 hover:scale-105"
+              className="w-full h-auto object-cover opacity-90 transition-transform duration-300 hover:scale-105"
             />
           ) : null}
         </div>

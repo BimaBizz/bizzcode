@@ -2,117 +2,99 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  ArrowLeft,
-  Home,
-  RefreshCcw,
-  TriangleAlert,
-} from "lucide-react";
+import { ArrowLeft, Home, RefreshCcw, AlertTriangle } from "lucide-react";
 
 export default function NotFoundPage() {
   const router = useRouter();
 
   return (
-    <main className="relative isolate overflow-hidden px-6 py-10 sm:px-8 sm:py-14">
-      
-      <section className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-5xl flex-col items-center justify-center text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/75 px-4 py-2 text-xs font-semibold tracking-[0.24em] text-foreground/60 shadow-sm backdrop-blur-xl">
-          <span className="h-2 w-2 rounded-full bg-amber-800 animate-pulse" />
-          SYSTEM_STATUS: DISCONNECTED
+    <main className="relative isolate overflow-hidden px-6 py-16 sm:py-24">
+      <section className="mx-auto flex min-h-[calc(100vh-12rem)] w-full max-w-4xl flex-col items-center justify-center text-center">
+        {/* Status Chip */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#27272A] bg-[#121212] px-3.5 py-1.5 text-xs font-mono tracking-widest text-[#A1A1AA]">
+          <span className="h-2 w-2 rounded-full bg-[#E8452C] animate-pulse" />
+          SYSTEM_STATUS: 404_NOT_FOUND
         </div>
 
-        <div className="mt-8 space-y-5">
-          <p className="font-heading text-[clamp(4rem,16vw,8.5rem)] font-black tracking-[-0.08em] text-foreground/10">
-            404
-          </p>
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#136e00]">
+        {/* Header Block */}
+        <div className="mt-8 space-y-3">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[#E8452C]">
             Error 404
           </p>
-          <h1 className="font-heading text-4xl font-black tracking-[-0.06em] text-foreground sm:text-5xl md:text-7xl">
-            Logic Not Found
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FAFAFA]">
+            Route Not Found
           </h1>
-          <p className="mx-auto max-w-2xl text-base leading-7 text-foreground/70 sm:text-lg">
-            Halaman yang Anda cari tidak ditemukan, sudah pindah, atau memang
-            tidak pernah ada. Server mengembalikan rute kosong.
+          <p className="mx-auto max-w-xl text-sm leading-relaxed text-[#A1A1AA]">
+            Halaman atau endpoint yang Anda tuju tidak ditemukan pada server.
           </p>
         </div>
 
-        <div className="mt-12 w-full lg:w-[70%] overflow-hidden rounded-[2rem] border border-border/70 bg-white/75 text-left shadow-[0_30px_80px_rgba(19,30,21,0.12)] backdrop-blur-xl">
-          <div className="flex items-center gap-3 px-4 py-3 sm:px-5">
-            <div className="flex gap-1.5">
-              <span className="h-3 w-3 rounded-full bg-[#ba1a1a]/40" />
-              <span className="h-3 w-3 rounded-full bg-[#7c5357]/40" />
-              <span className="h-3 w-3 rounded-full bg-[#136e00]/40" />
+        {/* Terminal Box */}
+        <div className="mt-10 w-full max-w-2xl overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] text-left shadow-2xl">
+          <div className="flex items-center justify-between border-b border-[#27272A] px-4 py-2.5 bg-[#181818]">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" />
             </div>
-            <div className="flex-1 text-center text-[11px] font-mono tracking-[0.24em] text-foreground/45 sm:text-xs">
-              guest@architect:~/portfolio/404
-            </div>
-            <div className="w-12" />
+            <span className="font-mono text-[11px] text-[#71717A]">
+              bmdev@portfolio:~/routes
+            </span>
+            <div className="w-10" />
           </div>
 
-          <div className="space-y-4 bg-[#191c1d] p-5 font-mono text-sm leading-relaxed text-[#f0f1f2] sm:p-6 sm:text-base">
-            <div className="flex items-center gap-3 text-[#4af626]">
-              <span className="text-lg">$</span>
-              <span>ls /requested-route</span>
+          <div className="space-y-3 bg-[#0A0A0A] p-5 font-mono text-xs leading-relaxed text-[#D4D4D8]">
+            <div className="flex items-center gap-2 text-[#FAFAFA]">
+              <span className="text-[#E8452C]">$</span>
+              <span>resolve-route --path current</span>
             </div>
-            <p className="text-[#f0f1f2]/70">
-              Mencari entry point yang cocok di filesystem...
+            <p className="text-[#71717A]">
+              Scanning internal filesystem routes...
             </p>
-            <div className="flex items-center gap-3 rounded-2xl border border-[#bbccb0]/20 bg-white/5 px-4 py-3 text-[#ffdad6]">
-              <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>[CRITICAL] 404: ENTRY_NOT_FOUND</span>
+            <div className="flex items-center gap-2 rounded-lg border border-red-900/40 bg-red-950/20 px-3 py-2 text-red-400">
+              <AlertTriangle className="h-4 w-4 shrink-0 text-[#E8452C]" />
+              <span>[ERR_ROUTE_MISSING] Nilai path tidak cocok dengan page yang tersedia.</span>
             </div>
-            <div>
-              <p className="text-[#4af626]">Possible solutions:</p>
-              <ol className="mt-2 list-decimal space-y-1 pl-5 text-[#f0f1f2]/75">
-                <li>Periksa kembali URL yang Anda buka.</li>
-                <li>Kembali ke halaman utama.</li>
-                <li>Gunakan tombol back jika ini salah klik.</li>
-              </ol>
+            <div className="pt-1 text-[#A1A1AA]">
+              <p className="text-[#FAFAFA] font-medium">Langkah rekomendasi:</p>
+              <ul className="mt-1.5 list-disc space-y-1 pl-4 text-[#A1A1AA]">
+                <li>Periksa URL yang diminta di browser bar.</li>
+                <li>Gunakan navigasi header atau kembali ke beranda.</li>
+              </ul>
             </div>
-            <div className="flex items-center gap-3 text-[#4af626]">
-              <span className="text-lg">$</span>
-              <span className="h-5 w-2 animate-pulse bg-[#4af626]" />
+            <div className="flex items-center gap-2 text-[#FAFAFA] pt-2">
+              <span className="text-[#E8452C]">$</span>
+              <span className="h-4 w-2 bg-[#E8452C] animate-pulse" />
             </div>
           </div>
         </div>
 
-        <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
+        {/* Actions */}
+        <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="/"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#136e00] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-[#136e00]/20 transition hover:-translate-y-0.5 hover:bg-[#0f5d00] sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#E8452C] hover:bg-[#d43c24] px-5 py-2.5 text-xs font-medium text-white transition-colors sm:w-auto"
           >
-            <Home className="h-5 w-5" />
+            <Home className="h-4 w-4" />
             Return Home
           </Link>
           <button
             type="button"
             onClick={() => router.back()}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/80 bg-white/75 px-8 py-4 text-base font-semibold text-foreground shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#27272A] bg-[#181818] hover:bg-[#202020] px-5 py-2.5 text-xs font-medium text-[#FAFAFA] transition-colors sm:w-auto"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <ArrowLeft className="h-4 w-4" />
             Go Back
           </button>
           <Link
             href="/"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/80 bg-white/55 px-8 py-4 text-base font-semibold text-foreground/80 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#27272A] bg-[#121212] hover:bg-[#181818] px-5 py-2.5 text-xs font-medium text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors sm:w-auto"
           >
-            <RefreshCcw className="h-5 w-5" />
-            Retry Route
+            <RefreshCcw className="h-4 w-4" />
+            Retry
           </Link>
         </div>
-
-        <p className="mt-8 max-w-xl text-sm text-foreground/50">
-          Jika Anda membuka halaman yang seharusnya ada, cek ulang slug atau
-          kembali ke beranda untuk mencari jalur yang benar.
-        </p>
       </section>
-
-      <div className="pointer-events-none absolute bottom-10 right-8 hidden opacity-10 lg:block">
-        <div className="font-heading text-[12rem] font-black tracking-[-0.1em] text-foreground/20">
-          404
-        </div>
-      </div>
     </main>
   );
 }

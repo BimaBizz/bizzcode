@@ -37,6 +37,6 @@ const markdownToHtml = (markdown = "") => {
 
 export default function MarkdownComponent({ data }) {
   return (
-    <div className="prose prose-invert max-w-none text-[#EAF6EF] prose-headings:font-heading prose-headings:text-[#EAF6EF] prose-p:text-[#8FAB9C] prose-a:text-[#4ADE80]" dangerouslySetInnerHTML={{ __html: markdownToHtml(data.markdown || "") }} />
+    <div className="prose prose-invert max-w-none text-[#FAFAFA] prose-headings:font-sans prose-headings:text-[#FAFAFA] prose-p:text-[#A1A1AA] prose-a:text-[#E8452C]" dangerouslySetInnerHTML={{ __html: markdownToHtml(data.markdown || "") }} />
   );
 }

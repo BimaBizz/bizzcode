@@ -130,8 +130,8 @@ export default async function LocaleHomePage({ params }) {
           <article className="space-y-6">
             {pageTitle || pageExcerpt ? (
               <header className="space-y-2">
-                {pageTitle ? <h1 className="font-heading text-4xl font-semibold tracking-tight">{pageTitle}</h1> : null}
-                {pageExcerpt ? <p className="max-w-3xl text-base opacity-80">{pageExcerpt}</p> : null}
+                {pageTitle ? <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#FAFAFA]">{pageTitle}</h1> : null}
+                {pageExcerpt ? <p className="max-w-3xl text-sm text-[#A1A1AA] leading-relaxed">{pageExcerpt}</p> : null}
               </header>
             ) : null}
 
@@ -156,29 +156,29 @@ export default async function LocaleHomePage({ params }) {
     <section className="space-y-10 max-w-7xl mx-auto w-full px-5">
       <div className="space-y-3">
         <p className="text-xs uppercase tracking-[0.25em] opacity-60">Cockpit CMS</p>
-        <h1 className="font-heading text-4xl font-semibold tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FAFAFA]">
           {settings.hero_title || settings.site_title || "Kelola konten dari Cockpit"}
         </h1>
-        <p className="max-w-2xl text-base opacity-80">
+        <p className="max-w-2xl text-sm text-[#A1A1AA]">
           {settings.hero_description || settings.site_description || "Aplikasi Next.js ini membaca konten langsung dari Cockpit API."}
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {posts.map((post) => (
-          <article key={post._id} className="overflow-hidden rounded-xl border border-border bg-card">
+          <article key={post._id} className="overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] p-5 shadow-lg transition-colors hover:border-[#3F3F46]">
             <CockpitImage
               asset={post.featured_image}
               alt={post.title}
               width={640}
               height={360}
-              className="h-48 w-full object-cover"
+              className="h-44 w-full object-cover rounded-lg"
             />
-            <div className="space-y-2 p-5">
-              <h2 className="font-heading text-xl font-semibold tracking-tight">
+            <div className="space-y-2 pt-4">
+              <h2 className="text-lg font-bold tracking-tight text-[#FAFAFA] hover:text-[#E8452C] transition-colors">
                 <Link href={localePath(locale, `blog/${post.slug}`)}>{post.title}</Link>
               </h2>
-              {post.excerpt ? <p className="text-sm opacity-80">{post.excerpt}</p> : null}
+              {post.excerpt ? <p className="text-xs text-[#A1A1AA] leading-relaxed line-clamp-3">{post.excerpt}</p> : null}
             </div>
           </article>
         ))}

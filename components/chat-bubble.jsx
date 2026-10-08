@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from "react";
 
 const parseMarkdown = (text) => {
   if (!text) return "";
-  
+
   // 1. Escape HTML first to prevent XSS
   let html = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // 2. Parse Markdown Tables into beautiful mobile-friendly lists
+  // 2. Parse Markdown Tables into compact mobile-friendly cards
   const lines = html.split("\n");
   const parsedLines = [];
   let inTable = false;
@@ -20,17 +20,16 @@ const parseMarkdown = (text) => {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-    
-    // Check if line is a table row
+
     if (line.startsWith("|") && line.endsWith("|")) {
-      const cells = line.split("|").map(c => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
-      const isSeparator = cells.every(c => /^:?-+:?$/.test(c));
-      
+      const cells = line.split("|").map((c) => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+      const isSeparator = cells.every((c) => /^:?-+:?$/.test(c));
+
       if (isSeparator) {
         inTable = true;
         continue;
       }
-      
+
       if (!inTable) {
         headers = cells;
         inTable = true;
@@ -39,36 +38,36 @@ const parseMarkdown = (text) => {
       }
     } else {
       if (inTable && headers.length > 0) {
-        let cardHtml = '<div class="space-y-3 my-3">';
-        tableRows.forEach(row => {
-          cardHtml += '<div class="p-3 bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 rounded-xl space-y-1">';
+        let cardHtml = '<div class="space-y-2 my-2">';
+        tableRows.forEach((row) => {
+          cardHtml += '<div class="p-2.5 bg-[#0D0D10] border border-[#27272A] rounded-lg space-y-1">';
           for (let j = 0; j < Math.max(headers.length, row.length); j++) {
             const header = headers[j] || "Info";
             const cell = row[j] || "-";
-            cardHtml += `<div><span class="text-zinc-400 dark:text-zinc-500 font-semibold block text-[9px] uppercase tracking-wider">${header}</span><span class="text-zinc-800 dark:text-zinc-200 text-xs">${cell}</span></div>`;
+            cardHtml += `<div><span class="text-[#71717A] font-mono block text-[9px] uppercase tracking-wider">${header}</span><span class="text-[#FAFAFA] text-xs">${cell}</span></div>`;
           }
           cardHtml += "</div>";
         });
         cardHtml += "</div>";
         parsedLines.push(cardHtml);
-        
+
         inTable = false;
         headers = [];
         tableRows = [];
       }
-      
+
       parsedLines.push(line);
     }
   }
 
   if (inTable && headers.length > 0) {
-    let cardHtml = '<div class="space-y-3 my-3">';
-    tableRows.forEach(row => {
-      cardHtml += '<div class="p-3 bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 rounded-xl space-y-1">';
+    let cardHtml = '<div class="space-y-2 my-2">';
+    tableRows.forEach((row) => {
+      cardHtml += '<div class="p-2.5 bg-[#0D0D10] border border-[#27272A] rounded-lg space-y-1">';
       for (let j = 0; j < Math.max(headers.length, row.length); j++) {
         const header = headers[j] || "Info";
         const cell = row[j] || "-";
-        cardHtml += `<div><span class="text-zinc-400 dark:text-zinc-500 font-semibold block text-[9px] uppercase tracking-wider">${header}</span><span class="text-zinc-800 dark:text-zinc-200 text-xs">${cell}</span></div>`;
+        cardHtml += `<div><span class="text-[#71717A] font-mono block text-[9px] uppercase tracking-wider">${header}</span><span class="text-[#FAFAFA] text-xs">${cell}</span></div>`;
       }
       cardHtml += "</div>";
     });
@@ -83,22 +82,22 @@ const parseMarkdown = (text) => {
     const cleanUrl = url.replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim();
     const isExternal = cleanUrl.startsWith("http") || cleanUrl.startsWith("//");
     const target = isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'target="_self"';
-    return `<a href="${cleanUrl}" ${target} class="text-[#4ADE80] hover:underline font-semibold">${label}</a>`;
+    return `<a href="${cleanUrl}" ${target} class="text-[#E8452C] hover:underline font-medium">${label}</a>`;
   });
 
   // 4. Parse auto-links <url>
   parsedText = parsedText.replace(/&lt;(https?:\/\/[^&>]+)&gt;/g, (match, url) => {
-    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#4ADE80] hover:underline font-semibold">${url}</a>`;
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#E8452C] hover:underline font-medium">${url}</a>`;
   });
 
   // 5. Parse bold text **bold**
-  parsedText = parsedText.replace(/\*\*([^*]+)\*\*/g, "<strong class=\"text-[#EAF6EF]\">$1</strong>");
+  parsedText = parsedText.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
 
   // 6. Parse inline code `code`
-  parsedText = parsedText.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-[#0B3B36] text-[#B0F5EC] border border-[#1E3A2C]/60 rounded font-mono text-[10px]">$1</code>');
+  parsedText = parsedText.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-[#0A0A0A] text-[#FAFAFA] border border-[#27272A] rounded font-mono text-[10px]">$1</code>');
 
-  // 7. Parse bullet points (lines starting with - or * followed by space)
-  parsedText = parsedText.replace(/^(?:\s*)[-*•]\s+(.+)$/gm, '<li class="ml-4 list-disc">$1</li>');
+  // 7. Parse bullet points
+  parsedText = parsedText.replace(/^(?:\s*)[-*•]\s+(.+)$/gm, '<li class="ml-4 list-disc text-[#D4D4D8]">$1</li>');
 
   return <div dangerouslySetInnerHTML={{ __html: parsedText }} className="space-y-1" />;
 };
@@ -108,7 +107,7 @@ export default function ChatBubble() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Halo! Saya adalah Asisten AI BMDev. Saya dapat membantu menjawab pertanyaan Anda seputar proyek dan layanan yang ada di website ini.",
+      content: "Halo! Saya adalah Asisten AI BMDev. Saya dapat membantu menjawab pertanyaan Anda seputar proyek, stack teknis, dan layanan.",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -118,19 +117,14 @@ export default function ChatBubble() {
   const chatUidRef = useRef(null);
 
   useEffect(() => {
-    // Generate a unique session ID for streaming progress tracking
     chatUidRef.current = "chat-" + Math.random().toString(36).substring(2, 11);
   }, []);
 
   useEffect(() => {
     if (isOpen) {
-      scrollToBottom();
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [isOpen, messages]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -142,17 +136,13 @@ export default function ChatBubble() {
     setIsLoading(true);
 
     const updatedMessages = [...messages, userMessage];
-
-    // Placeholder for streaming assistant response
     const assistantPlaceholder = { role: "assistant", content: "" };
     setMessages((prev) => [...prev, assistantPlaceholder]);
 
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: updatedMessages,
           uid: chatUidRef.current,
@@ -175,7 +165,6 @@ export default function ChatBubble() {
         const chunkValue = decoder.decode(value);
         text += chunkValue;
 
-        // Update the last message (the assistant response) with the streamed text
         setMessages((prev) => {
           const list = [...prev];
           if (list.length > 0) {
@@ -194,7 +183,7 @@ export default function ChatBubble() {
         if (list.length > 0) {
           list[list.length - 1] = {
             role: "assistant",
-            content: "Maaf, terjadi kesalahan saat memproses permintaan Anda. Pastikan koneksi aman.",
+            content: "Maaf, terjadi kendala saat memproses permintaan. Silakan coba kembali.",
           };
         }
         return list;
@@ -206,19 +195,19 @@ export default function ChatBubble() {
 
   return (
     <>
-      {/* Floating Chat Bubble Button (Material 3 Expressive) */}
+      {/* Floating Chat Trigger */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-[24px] bg-[#4ADE80] !text-[#062011] shadow-2xl hover:scale-105 active:scale-95 transition-all duration-350 ease-[cubic-bezier(.34,1.56,.64,1)] group focus:outline-none"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-[#121212] border border-[#27272A] text-[#FAFAFA] hover:border-[#E8452C] hover:text-[#E8452C] shadow-2xl transition-all duration-200 active:scale-95 group focus:outline-none"
         aria-label="Tanya Asisten AI"
       >
-        <span className="absolute w-full h-full rounded-[24px] bg-[#4ADE80]/20 animate-ping opacity-75 group-hover:hidden" />
+        <span className="absolute top-0 right-0 w-3 h-3 rounded-full bg-[#E8452C] ring-2 ring-[#0A0A0A]" />
         {isOpen ? (
-          <svg className="w-6 h-6 stroke-[#062011]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+          <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-6 h-6 stroke-[#062011]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+          <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -228,44 +217,44 @@ export default function ChatBubble() {
         )}
       </button>
 
-      {/* Chat Window Dialog (Material 3 Expressive Surface) */}
+      {/* Chat Window Dialog */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-[350px] sm:w-[380px] h-[500px] bg-[#0F221A]/95 border border-[#1E3A2C] rounded-[28px] rounded-br-[8px] shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-5">
+        <div className="fixed bottom-22 right-6 z-50 w-[350px] sm:w-[380px] h-[480px] bg-[#121212]/95 border border-[#27272A] rounded-2xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl transition-all duration-200 animate-in fade-in slide-in-from-bottom-2">
           {/* Header */}
-          <div className="p-4 border-b border-[#1E3A2C] flex items-center justify-between bg-[#081410]/80">
+          <div className="p-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#181818]/80">
             <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#4ADE80] animate-pulse shadow-sm shadow-[#4ADE80]/50" />
+              <span className="w-2 h-2 rounded-full bg-[#E8452C]" />
               <div>
-                <h4 className="font-heading font-semibold text-sm text-[#EAF6EF] leading-tight">
+                <h4 className="font-medium text-xs text-[#FAFAFA] leading-tight">
                   BMDev Assistant
                 </h4>
-                <p className="text-[10px] text-[#8FAB9C] font-medium">
-                  Powered By AI
+                <p className="text-[10px] text-[#71717A] font-mono">
+                  Online
                 </p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 rounded-full hover:bg-[#1E3A2C]/60 text-[#8FAB9C] hover:text-[#EAF6EF] transition-colors"
+              className="p-1 rounded-md text-[#71717A] hover:text-[#FAFAFA] hover:bg-[#27272A] transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-3.5 space-y-3">
             {messages.map((msg, idx) => (
               <div
                 key={idx}
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-[20px] px-4 py-3 text-xs shadow-md break-words ${
+                  className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-xs shadow-sm break-words ${
                     msg.role === "user"
-                      ? "bg-[#4ADE80] !text-[#062011] rounded-tr-none font-bold"
-                      : "bg-[#081410] text-[#EAF6EF] border border-[#1E3A2C] rounded-tl-none leading-relaxed"
+                      ? "bg-[#E8452C] text-white rounded-tr-none font-medium"
+                      : "bg-[#181818] text-[#FAFAFA] border border-[#27272A] rounded-tl-none leading-relaxed"
                   }`}
                   style={{ whiteSpace: "pre-wrap" }}
                 >
@@ -275,9 +264,9 @@ export default function ChatBubble() {
                     parseMarkdown(msg.content)
                   ) : (
                     <span className="flex items-center gap-1.5 py-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-bounce" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-bounce delay-150" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-bounce delay-300" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C] animate-bounce" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C] animate-bounce delay-150" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C] animate-bounce delay-300" />
                     </span>
                   )}
                 </div>
@@ -289,22 +278,22 @@ export default function ChatBubble() {
           {/* Input Bar */}
           <form
             onSubmit={handleSend}
-            className="p-3 border-t border-[#1E3A2C] bg-[#081410]/80 flex gap-2"
+            className="p-3 border-t border-[#27272A] bg-[#181818]/80 flex gap-2"
           >
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Tanyakan tentang proyek kami..."
+              placeholder="Tanyakan tentang proyek atau stack..."
               disabled={isLoading}
-              className="flex-1 bg-[#0F221A] border border-[#1E3A2C] rounded-full px-4 py-2.5 text-xs focus:outline-none focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] disabled:opacity-60 text-[#EAF6EF] placeholder-[#8FAB9C]/60"
+              className="flex-1 bg-[#121212] border border-[#27272A] rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#E8452C] focus:ring-1 focus:ring-[#E8452C] disabled:opacity-60 text-[#FAFAFA] placeholder-[#71717A]"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#4ADE80] !text-[#062011] font-bold disabled:opacity-40 transition-all shadow-md shadow-[#4ADE80]/10"
+              className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#E8452C] hover:bg-[#d43c24] text-white disabled:opacity-40 transition-colors cursor-pointer shrink-0"
             >
-              <svg className="w-4 h-4 rotate-90 stroke-[#062011]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+              <svg className="w-3.5 h-3.5 rotate-90 stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
             </button>
