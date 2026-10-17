@@ -13,3 +13,5 @@ export { default as CardDevOpsComponent } from "./CardDevOpsComponent";
 export { default as CardTagsComponent } from "./CardTagsComponent";
 export { default as CardImageComponent } from "./CardImageComponent";
 export { default as DetailContactComponent } from "./DetailContactComponent";
+export { default as CardServicesComponent } from "./CardServicesComponent";
+export { default as CardCtaComponent } from "./CardCtaComponent";

@@ -25,6 +25,8 @@ import CardDevOpsComponent from "./CardDevOpsComponent";
 import CardTagsComponent from "./CardTagsComponent";
 import CardImageComponent from "./CardImageComponent";
 import DetailContactComponent from "./DetailContactComponent";
+import CardServicesComponent from "./CardServicesComponent";
+import CardCtaComponent from "./CardCtaComponent";
 
 
 export default function CustomComponentRenderer({ rawComponent, item, data, nestedComponents, locale, LayoutRenderer }) {
@@ -101,6 +103,23 @@ export default function CustomComponentRenderer({ rawComponent, item, data, nest
 
   if (rawComponent === "detailcontact" || rawComponent === "detail-contact" || rawComponent === "detail_contact") {
     return <DetailContactComponent data={data} />;
+  }
+
+  if (
+    rawComponent === "cardservices" ||
+    rawComponent === "card-services" ||
+    rawComponent === "card_services" ||
+    rawComponent === "services"
+  ) {
+    return <CardServicesComponent data={data} locale={locale} />;
+  }
+
+  if (
+    rawComponent === "card-cta" ||
+    rawComponent === "card_cta" ||
+    rawComponent === "cardcta"
+  ) {
+    return <CardCtaComponent data={data} locale={locale} />;
   }
 
   // If component has nested content or HTML, render it as fallback
