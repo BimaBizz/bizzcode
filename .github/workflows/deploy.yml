@@ -33,6 +33,16 @@ jobs:
             echo "Warning: ENV_PRODUCTION secret is not set, using default build."
           fi
 
+      - name: ⚡ Cache Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.mjs') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
       - name: 🔨 Build Next.js Application
         run: npm run build
 
@@ -49,14 +59,17 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p ${{ secrets.SSH_PORT || 22 }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: 📦 Package build artifacts
+      - name: 📦 Package build artifacts (Optimized)
         run: |
-          echo "Packaging production files into /tmp/deploy.tar.gz..."
-          tar --exclude='.git' \
+          echo "Packaging production files (excluding .next/cache)..."
+          # Menggunakan gzip level 1 (-1) untuk kompresi super cepat & exclude cache Next.js
+          GZIP=-1 tar --exclude='.git' \
               --exclude='.github' \
               --exclude='*.md' \
               --exclude='.DS_Store' \
+              --exclude='.next/cache' \
               -czf /tmp/deploy.tar.gz .
+          echo "Archive size:"
           ls -lh /tmp/deploy.tar.gz
 
       - name: 🚀 Upload & Extract on Jagoan Hosting
