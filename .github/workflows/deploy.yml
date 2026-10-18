@@ -51,14 +51,13 @@ jobs:
 
       - name: 📦 Package build artifacts
         run: |
-          echo "Packaging production files into deploy.tar.gz..."
+          echo "Packaging production files into /tmp/deploy.tar.gz..."
           tar --exclude='.git' \
               --exclude='.github' \
               --exclude='*.md' \
               --exclude='.DS_Store' \
-              --exclude='deploy.tar.gz' \
-              -czf deploy.tar.gz .
-          ls -lh deploy.tar.gz
+              -czf /tmp/deploy.tar.gz .
+          ls -lh /tmp/deploy.tar.gz
 
       - name: 🚀 Upload & Extract on Jagoan Hosting
         run: |
@@ -75,7 +74,7 @@ jobs:
             "mkdir -p \"$TARGET_DIR\""
 
           # 2. Upload file archive via SCP
-          scp -P ${{ secrets.SSH_PORT || 22 }} deploy.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"$TARGET_DIR"/deploy.tar.gz
+          scp -P ${{ secrets.SSH_PORT || 22 }} /tmp/deploy.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"$TARGET_DIR"/deploy.tar.gz
 
           # 3. Ekstrak archive di server dan hapus file tar.gz
           ssh -p ${{ secrets.SSH_PORT || 22 }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
