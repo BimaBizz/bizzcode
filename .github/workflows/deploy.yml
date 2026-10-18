@@ -49,7 +49,18 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p ${{ secrets.SSH_PORT || 22 }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: 🚀 Deploy files via Rsync
+      - name: 📦 Package build artifacts
+        run: |
+          echo "Packaging production files into deploy.tar.gz..."
+          tar --exclude='.git' \
+              --exclude='.github' \
+              --exclude='*.md' \
+              --exclude='.DS_Store' \
+              --exclude='deploy.tar.gz' \
+              -czf deploy.tar.gz .
+          ls -lh deploy.tar.gz
+
+      - name: 🚀 Upload & Extract on Jagoan Hosting
         run: |
           TARGET_DIR="${{ secrets.SSH_TARGET_DIR }}"
           # Jika diisi '/bizzcode' (dari FileZilla), ubah jadi 'bizzcode' agar relatif ke home directory cPanel
@@ -59,14 +70,16 @@ jobs:
 
           echo "Deploying to target directory: $TARGET_DIR"
 
-          rsync -avz --delete \
-            -e "ssh -p ${{ secrets.SSH_PORT || 22 }}" \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='*.md' \
-            --exclude='.DS_Store' \
-            --exclude='tmp/' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"$TARGET_DIR"/
+          # 1. Pastikan folder tujuan tersedia di server
+          ssh -p ${{ secrets.SSH_PORT || 22 }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "mkdir -p \"$TARGET_DIR\""
+
+          # 2. Upload file archive via SCP
+          scp -P ${{ secrets.SSH_PORT || 22 }} deploy.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"$TARGET_DIR"/deploy.tar.gz
+
+          # 3. Ekstrak archive di server dan hapus file tar.gz
+          ssh -p ${{ secrets.SSH_PORT || 22 }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd \"$TARGET_DIR\" && tar -xzf deploy.tar.gz && rm -f deploy.tar.gz"
 
       - name: 🔄 Restart Node.js App on cPanel (Passenger)
         run: |
