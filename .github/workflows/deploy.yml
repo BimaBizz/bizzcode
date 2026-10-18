@@ -1,4 +1,4 @@
-name: Build and Deploy to Jagoan Hosting
+name: Build and Deploy
 
 on:
   push:
