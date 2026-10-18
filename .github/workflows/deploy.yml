@@ -1,0 +1,80 @@
+name: Build and Deploy to Jagoan Hosting
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install all dependencies
+        run: npm ci
+
+      - name: 📝 Inject Environment Variables (.env)
+        run: |
+          if [ -n "${{ secrets.ENV_PRODUCTION }}" ]; then
+            echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
+            echo "${{ secrets.ENV_PRODUCTION }}" > .env
+          else
+            echo "Warning: ENV_PRODUCTION secret is not set, using default build."
+          fi
+
+      - name: 🔨 Build Next.js Application
+        run: npm run build
+
+      - name: 🧹 Prune devDependencies for production
+        run: npm prune --production
+
+      - name: 🔑 Configure SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 🛡️ Add Host Key to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.SSH_PORT || 22 }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy files via Rsync
+        run: |
+          TARGET_DIR="${{ secrets.SSH_TARGET_DIR }}"
+          # Jika diisi '/bizzcode' (dari FileZilla), ubah jadi 'bizzcode' agar relatif ke home directory cPanel
+          if [[ "$TARGET_DIR" == /* ]] && [[ "$TARGET_DIR" != /home/* ]]; then
+            TARGET_DIR="${TARGET_DIR#/}"
+          fi
+
+          echo "Deploying to target directory: $TARGET_DIR"
+
+          rsync -avz --delete \
+            -e "ssh -p ${{ secrets.SSH_PORT || 22 }}" \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='*.md' \
+            --exclude='.DS_Store' \
+            --exclude='tmp/' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"$TARGET_DIR"/
+
+      - name: 🔄 Restart Node.js App on cPanel (Passenger)
+        run: |
+          TARGET_DIR="${{ secrets.SSH_TARGET_DIR }}"
+          if [[ "$TARGET_DIR" == /* ]] && [[ "$TARGET_DIR" != /home/* ]]; then
+            TARGET_DIR="${TARGET_DIR#/}"
+          fi
+
+          ssh -p ${{ secrets.SSH_PORT || 22 }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "mkdir -p \"$TARGET_DIR\"/tmp && touch \"$TARGET_DIR\"/tmp/restart.txt"
+          echo "Application restart triggered successfully!"
