@@ -9,17 +9,17 @@ export default function CardTagsComponent({ data }) {
   const cta = data.cta || {};
 
   return (
-    <article className="w-full h-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between">
+    <article className="w-full h-full bg-[#FAF7F0] border border-[#111111]/15 rounded-xl p-6 md:p-8 shadow-sm flex flex-col justify-between">
       <div>
         {/* Header */}
         <div className="flex flex-col mb-5">
           {title && (
-            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#111111]">
               {title}
             </h3>
           )}
           {subTitle && (
-            <p className="text-[#A1A1AA] text-xs leading-relaxed mt-1 font-normal">
+            <p className="text-[#57534E] text-xs leading-relaxed mt-1 font-normal">
               {subTitle}
             </p>
           )}
@@ -33,7 +33,7 @@ export default function CardTagsComponent({ data }) {
               return (
                 <span
                   key={index}
-                  className="bg-[#181818] text-[#FAFAFA] border border-[#27272A] font-mono text-xs px-2.5 py-1 rounded-md"
+                  className="bg-[#EBE4D5] text-[#111111] border border-[#111111]/15 font-mono text-xs px-2.5 py-1 rounded-md"
                 >
                   {tag.trim()}
                 </span>
@@ -48,7 +48,7 @@ export default function CardTagsComponent({ data }) {
         <div className="mt-auto pt-4">
           <Link
             href={cta.link || "#"}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#E8452C] hover:text-[#d43c24] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#D9541E] hover:text-[#BF4615] transition-colors"
           >
             <span>{cta.caption}</span>
             <span className="text-sm">→</span>

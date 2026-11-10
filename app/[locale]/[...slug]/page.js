@@ -174,12 +174,12 @@ export default async function DynamicPage({ params, searchParams }) {
   return (
     <article className="space-y-6">
       <header className="space-y-2">
-        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FAFAFA]">{page.title || slugPath}</h1>
-        {page.excerpt ? <p className="max-w-3xl text-sm text-[#A1A1AA] leading-relaxed">{page.excerpt}</p> : null}
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#111111]">{page.title || slugPath}</h1>
+        {page.excerpt ? <p className="max-w-3xl text-sm text-[#57534E] leading-relaxed">{page.excerpt}</p> : null}
       </header>
 
       <div
-        className="prose prose-neutral max-w-none dark:prose-invert"
+        className="prose prose-neutral max-w-none prose-headings:text-[#111111] prose-p:text-[#57534E] prose-a:text-[#D9541E]"
         dangerouslySetInnerHTML={{ __html: page.content || page.body || "" }}
       />
     </article>

@@ -53,7 +53,7 @@ export default function HeroImageComponent({ data }) {
   return (
     <div className="relative group">
       <div
-        className="relative overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] p-1.5 shadow-2xl h-80 lg:h-[450px] flex flex-col justify-end"
+        className="relative overflow-hidden rounded-xl border border-[#111111]/15 bg-[#111111] p-1.5 shadow-xl h-80 lg:h-[450px] flex flex-col justify-end"
         role="img"
         aria-label={imageAlt || "preview"}
       >
@@ -62,18 +62,18 @@ export default function HeroImageComponent({ data }) {
           <img
             src={backgroundSrc}
             alt={imageAlt || "Developer portrait"}
-            className="w-full h-full object-cover rounded-lg opacity-90 transition-transform duration-500 ease-out group-hover:scale-105"
+            className="w-full h-full object-cover rounded-lg opacity-95 transition-transform duration-500 ease-out group-hover:scale-105"
           />
         ) : null}
 
-        <div className="absolute z-30 bottom-3.5 left-3.5 right-3.5 flex items-center justify-between rounded-lg bg-[#121212]/90 border border-[#27272A] p-3 backdrop-blur-xl">
+        <div className="absolute z-30 bottom-3.5 left-3.5 right-3.5 flex items-center justify-between rounded-lg bg-[#111111]/90 border border-[#262626] p-3 backdrop-blur-xl">
           <div>
-            <p className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#E8452C]">
+            <p className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#D9541E]">
               CURRENT TECH
             </p>
-            <p className="text-xs font-semibold text-[#FAFAFA]">{currentTech}</p>
+            <p className="text-xs font-semibold text-[#F3EEE3]">{currentTech}</p>
           </div>
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#181818] border border-[#27272A] text-[#E8452C]">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#1F1F1F] border border-[#2E2E2E] text-[#D9541E]">
             <span aria-hidden="true">
               <LuZap className="h-3.5 w-3.5" />
             </span>

@@ -1,6 +1,19 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { BMDevMark } from "@/components/ui/bmdev-logo";
+
+const QUICK_PROMPTS = [
+  "Apa saja layanan BMDev?",
+  "Lihat proyek terbaru",
+  "Tech stack yang dikuasai",
+];
+
+const INITIAL_MESSAGE = {
+  role: "assistant",
+  content:
+    "Halo! Saya asisten AI BMDev. Tanyakan apa saja seputar portofolio proyek, arsitektur teknis, atau layanan pembuatan website.",
+};
 
 const parseMarkdown = (text) => {
   if (!text) return "";
@@ -40,11 +53,11 @@ const parseMarkdown = (text) => {
       if (inTable && headers.length > 0) {
         let cardHtml = '<div class="space-y-2 my-2">';
         tableRows.forEach((row) => {
-          cardHtml += '<div class="p-2.5 bg-[#0D0D10] border border-[#27272A] rounded-lg space-y-1">';
+          cardHtml += '<div class="p-2.5 bg-[#F3EEE3] border border-[#111111]/15 rounded-lg space-y-1">';
           for (let j = 0; j < Math.max(headers.length, row.length); j++) {
             const header = headers[j] || "Info";
             const cell = row[j] || "-";
-            cardHtml += `<div><span class="text-[#71717A] font-mono block text-[9px] uppercase tracking-wider">${header}</span><span class="text-[#FAFAFA] text-xs">${cell}</span></div>`;
+            cardHtml += `<div><span class="text-[#57534E] font-mono block text-[9px] uppercase tracking-wider">${header}</span><span class="text-[#111111] text-xs">${cell}</span></div>`;
           }
           cardHtml += "</div>";
         });
@@ -63,11 +76,11 @@ const parseMarkdown = (text) => {
   if (inTable && headers.length > 0) {
     let cardHtml = '<div class="space-y-2 my-2">';
     tableRows.forEach((row) => {
-      cardHtml += '<div class="p-2.5 bg-[#0D0D10] border border-[#27272A] rounded-lg space-y-1">';
+      cardHtml += '<div class="p-2.5 bg-[#F3EEE3] border border-[#111111]/15 rounded-lg space-y-1">';
       for (let j = 0; j < Math.max(headers.length, row.length); j++) {
         const header = headers[j] || "Info";
         const cell = row[j] || "-";
-        cardHtml += `<div><span class="text-[#71717A] font-mono block text-[9px] uppercase tracking-wider">${header}</span><span class="text-[#FAFAFA] text-xs">${cell}</span></div>`;
+        cardHtml += `<div><span class="text-[#57534E] font-mono block text-[9px] uppercase tracking-wider">${header}</span><span class="text-[#111111] text-xs">${cell}</span></div>`;
       }
       cardHtml += "</div>";
     });
@@ -82,38 +95,34 @@ const parseMarkdown = (text) => {
     const cleanUrl = url.replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim();
     const isExternal = cleanUrl.startsWith("http") || cleanUrl.startsWith("//");
     const target = isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'target="_self"';
-    return `<a href="${cleanUrl}" ${target} class="text-[#E8452C] hover:underline font-medium">${label}</a>`;
+    return `<a href="${cleanUrl}" ${target} class="text-[#D9541E] hover:underline font-medium">${label}</a>`;
   });
 
   // 4. Parse auto-links <url>
   parsedText = parsedText.replace(/&lt;(https?:\/\/[^&>]+)&gt;/g, (match, url) => {
-    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#E8452C] hover:underline font-medium">${url}</a>`;
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#D9541E] hover:underline font-medium">${url}</a>`;
   });
 
   // 5. Parse bold text **bold**
-  parsedText = parsedText.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+  parsedText = parsedText.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-[#111111] font-semibold">$1</strong>');
 
   // 6. Parse inline code `code`
-  parsedText = parsedText.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-[#0A0A0A] text-[#FAFAFA] border border-[#27272A] rounded font-mono text-[10px]">$1</code>');
+  parsedText = parsedText.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-[#EBE4D5] text-[#111111] border border-[#111111]/15 rounded font-mono text-[10px]">$1</code>');
 
   // 7. Parse bullet points
-  parsedText = parsedText.replace(/^(?:\s*)[-*•]\s+(.+)$/gm, '<li class="ml-4 list-disc text-[#D4D4D8]">$1</li>');
+  parsedText = parsedText.replace(/^(?:\s*)[-*•]\s+(.+)$/gm, '<li class="ml-4 list-disc text-[#57534E]">$1</li>');
 
   return <div dangerouslySetInnerHTML={{ __html: parsedText }} className="space-y-1" />;
 };
 
 export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content: "Halo! Saya adalah Asisten AI BMDev. Saya dapat membantu menjawab pertanyaan Anda seputar proyek, stack teknis, dan layanan.",
-    },
-  ]);
+  const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
   const chatUidRef = useRef(null);
 
   useEffect(() => {
@@ -123,14 +132,15 @@ export default function ChatBubble() {
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      inputRef.current?.focus();
     }
   }, [isOpen, messages]);
 
-  const handleSend = async (e) => {
-    e.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
+  const sendPrompt = async (promptText) => {
+    const trimmed = String(promptText || "").trim();
+    if (!trimmed || isLoading) return;
 
-    const userMessage = { role: "user", content: inputValue };
+    const userMessage = { role: "user", content: trimmed };
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsLoading(true);
@@ -193,110 +203,196 @@ export default function ChatBubble() {
     }
   };
 
+  const handleSend = (e) => {
+    e.preventDefault();
+    sendPrompt(inputValue);
+  };
+
+  const handleReset = () => {
+    if (isLoading) return;
+    chatUidRef.current = "chat-" + Math.random().toString(36).substring(2, 11);
+    setMessages([INITIAL_MESSAGE]);
+    setInputValue("");
+  };
+
   return (
     <>
       {/* Floating Chat Trigger */}
       <button
+        type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-[#121212] border border-[#27272A] text-[#FAFAFA] hover:border-[#E8452C] hover:text-[#E8452C] shadow-2xl transition-all duration-200 active:scale-95 group focus:outline-none"
-        aria-label="Tanya Asisten AI"
+        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 rounded-full border transition-all duration-200 active:scale-95 cursor-pointer focus:outline-none shadow-xl ${
+          isOpen
+            ? "h-11 w-11 justify-center bg-[#111111] border-[#111111] text-[#F3EEE3] hover:bg-[#D9541E] hover:border-[#D9541E]"
+            : "h-12 pl-3 pr-4 bg-[#111111] border-[#111111]/90 text-[#F3EEE3] hover:border-[#D9541E] group"
+        }`}
+        aria-label={isOpen ? "Tutup Asisten AI" : "Tanya Asisten AI"}
       >
-        <span className="absolute top-0 right-0 w-3 h-3 rounded-full bg-[#E8452C] ring-2 ring-[#0A0A0A]" />
         {isOpen ? (
-          <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg className="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-            />
-          </svg>
+          <>
+            <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-[#D9541E] text-white shadow-sm transition-transform duration-200 group-hover:scale-105">
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
+                />
+              </svg>
+            </span>
+            <span className="flex flex-col items-start leading-none">
+              <span className="text-[11px] font-semibold tracking-tight text-[#F3EEE3]">
+                Tanya AI
+              </span>
+              <span className="text-[9px] font-mono text-[#F3EEE3]/65 uppercase tracking-wider mt-0.5">
+                BMDev Agent
+              </span>
+            </span>
+          </>
         )}
       </button>
 
       {/* Chat Window Dialog */}
       {isOpen && (
-        <div className="fixed bottom-22 right-6 z-50 w-[350px] sm:w-[380px] h-[480px] bg-[#121212]/95 border border-[#27272A] rounded-2xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl transition-all duration-200 animate-in fade-in slide-in-from-bottom-2">
+        <div className="fixed bottom-20 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[390px] h-[520px] max-h-[calc(100vh-7rem)] bg-[#F3EEE3] border border-[#111111]/20 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-200 animate-in fade-in slide-in-from-bottom-2">
           {/* Header */}
-          <div className="p-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#181818]/80">
+          <div className="px-4 py-3 border-b border-[#111111]/12 flex items-center justify-between bg-[#FAF7F0]">
             <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-[#E8452C]" />
+              <div className="w-8 h-8 rounded-lg bg-[#111111] border border-[#111111] shadow-[2px_2px_0px_#D9541E] flex items-center justify-center p-1 text-[#F3EEE3] shrink-0">
+                <BMDevMark className="w-5 h-5 text-[#F3EEE3]" />
+              </div>
               <div>
-                <h4 className="font-medium text-xs text-[#FAFAFA] leading-tight">
-                  BMDev Assistant
-                </h4>
-                <p className="text-[10px] text-[#71717A] font-mono">
-                  Online
+                <div className="flex items-center gap-2">
+                  <h4 className="font-bold text-xs text-[#111111] tracking-tight">
+                    BMDev Assistant
+                  </h4>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[#EBE4D5] border border-[#111111]/10 px-2 py-0.5 text-[9px] font-mono font-semibold uppercase tracking-wider text-[#111111]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#D9541E] animate-pulse" />
+                    Online
+                  </span>
+                </div>
+                <p className="text-[10px] text-[#57534E] font-mono mt-0.5">
+                  Portfolio & Technical Guide
                 </p>
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-1 rounded-md text-[#71717A] hover:text-[#FAFAFA] hover:bg-[#27272A] transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+
+            <div className="flex items-center gap-1">
+              {messages.length > 1 && (
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  disabled={isLoading}
+                  title="Reset percakapan"
+                  className="p-1.5 rounded-lg text-[#57534E] hover:text-[#111111] hover:bg-[#EBE4D5] transition-colors cursor-pointer disabled:opacity-40"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                aria-label="Tutup chat"
+                className="p-1.5 rounded-lg text-[#57534E] hover:text-[#111111] hover:bg-[#EBE4D5] transition-colors cursor-pointer"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-3.5 space-y-3">
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-              >
+          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-[#F3EEE3]">
+            {messages.map((msg, idx) => {
+              const isUser = msg.role === "user";
+              return (
                 <div
-                  className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-xs shadow-sm break-words ${
-                    msg.role === "user"
-                      ? "bg-[#E8452C] text-white rounded-tr-none font-medium"
-                      : "bg-[#181818] text-[#FAFAFA] border border-[#27272A] rounded-tl-none leading-relaxed"
-                  }`}
-                  style={{ whiteSpace: "pre-wrap" }}
+                  key={idx}
+                  className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}
                 >
-                  {msg.role === "user" ? (
-                    msg.content
-                  ) : msg.content ? (
-                    parseMarkdown(msg.content)
-                  ) : (
-                    <span className="flex items-center gap-1.5 py-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C] animate-bounce" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C] animate-bounce delay-150" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C] animate-bounce delay-300" />
-                    </span>
-                  )}
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-[#78716C] mb-1 px-1">
+                    {isUser ? "Anda" : "BMDev AI"}
+                  </span>
+                  <div
+                    className={`max-w-[86%] rounded-2xl px-3.5 py-2.5 text-xs break-words ${
+                      isUser
+                        ? "bg-[#111111] text-[#F3EEE3] rounded-tr-sm font-normal shadow-sm"
+                        : "bg-[#FAF7F0] text-[#111111] border border-[#111111]/12 rounded-tl-sm leading-relaxed shadow-xs"
+                    }`}
+                    style={{ whiteSpace: "pre-wrap" }}
+                  >
+                    {isUser ? (
+                      msg.content
+                    ) : msg.content ? (
+                      parseMarkdown(msg.content)
+                    ) : (
+                      <span className="flex items-center gap-1.5 py-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#D9541E] animate-bounce" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#D9541E] animate-bounce delay-150" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#D9541E] animate-bounce delay-300" />
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Quick Starter Prompts */}
+            {messages.length === 1 && !isLoading && (
+              <div className="pt-1 space-y-1.5">
+                <p className="text-[10px] font-mono uppercase tracking-wider text-[#78716C] px-1">
+                  Pertanyaan Cepat
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {QUICK_PROMPTS.map((prompt) => (
+                    <button
+                      key={prompt}
+                      type="button"
+                      onClick={() => sendPrompt(prompt)}
+                      className="text-left text-[11px] font-medium px-3 py-1.5 rounded-xl bg-[#FAF7F0] hover:bg-[#EBE4D5] text-[#111111] border border-[#111111]/15 hover:border-[#D9541E] transition-colors cursor-pointer"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
                 </div>
               </div>
-            ))}
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input Bar */}
           <form
             onSubmit={handleSend}
-            className="p-3 border-t border-[#27272A] bg-[#181818]/80 flex gap-2"
+            className="p-3 border-t border-[#111111]/12 bg-[#FAF7F0]"
           >
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Tanyakan tentang proyek atau stack..."
-              disabled={isLoading}
-              className="flex-1 bg-[#121212] border border-[#27272A] rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#E8452C] focus:ring-1 focus:ring-[#E8452C] disabled:opacity-60 text-[#FAFAFA] placeholder-[#71717A]"
-            />
-            <button
-              type="submit"
-              disabled={!inputValue.trim() || isLoading}
-              className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#E8452C] hover:bg-[#d43c24] text-white disabled:opacity-40 transition-colors cursor-pointer shrink-0"
-            >
-              <svg className="w-3.5 h-3.5 rotate-90 stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-2 rounded-xl bg-[#F3EEE3] border border-[#111111]/15 px-3 py-1.5 focus-within:border-[#D9541E] focus-within:ring-1 focus-within:ring-[#D9541E] transition-all">
+              <input
+                ref={inputRef}
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Tulis pertanyaan Anda..."
+                disabled={isLoading}
+                className="flex-1 bg-transparent py-1 text-xs focus:outline-none disabled:opacity-60 text-[#111111] placeholder-[#78716C]"
+              />
+              <button
+                type="submit"
+                disabled={!inputValue.trim() || isLoading}
+                aria-label="Kirim pesan"
+                className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#D9541E] hover:bg-[#BF4615] text-white disabled:opacity-35 transition-colors cursor-pointer shrink-0"
+              >
+                <svg className="w-3.5 h-3.5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </form>
         </div>
       )}

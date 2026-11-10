@@ -75,12 +75,12 @@ export default async function LocaleLayout({ children, params }) {
         {children}
       </main>
       <ChatBubble />
-      <footer className="w-full px-6 py-12 mt-16 border-t border-[#27272A]/80">
-        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#A1A1AA]">
+      <footer className="w-full px-6 py-12 mt-16 border-t border-[#111111]/15">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#57534E]">
           <div className="flex items-center gap-2">
-            <span>&copy; {new Date().getFullYear()} {settings.site_title || "BMDev"}.</span>
-            <span className="text-[#3F3F46]">/</span>
-            <span className="font-mono text-[#71717A]">Fullstack Web Developer</span>
+            <span className="font-medium text-[#111111]">&copy; {new Date().getFullYear()} {settings.site_title || "BMDev"}.</span>
+            <span className="text-[#111111]/30">/</span>
+            <span className="font-mono text-[#57534E]">Fullstack Web Developer</span>
           </div>
 
           <nav className="flex flex-wrap items-center gap-6 font-mono text-[11px] tracking-wider">
@@ -90,7 +90,7 @@ export default async function LocaleLayout({ children, params }) {
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                className="text-[#A1A1AA] hover:text-[#E8452C] transition-colors uppercase"
+                className="text-[#111111] hover:text-[#D9541E] transition-colors uppercase font-medium"
               >
                 {label}
               </a>

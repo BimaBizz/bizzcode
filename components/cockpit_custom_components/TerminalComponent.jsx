@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import hljs from "highlight.js";
-import "highlight.js/styles/tokyo-night-dark.min.css";
+import "highlight.js/styles/base16/gruvbox-dark-hard.min.css";
 
 const htmlToTerminalText = (html = "") =>
   String(html)
@@ -109,23 +109,23 @@ export default function TerminalComponent({ data }) {
   }
 
   return (
-    <section className="h-130 flex flex-col overflow-hidden rounded-xl border border-[#27272A] bg-[#0D0D10] shadow-2xl">
-      <div className="flex items-center justify-between border-b border-[#27272A] px-4 py-2.5 bg-[#181818]">
+    <section className="h-130 flex flex-col overflow-hidden rounded-xl border border-[#262626] bg-[#111111] shadow-2xl">
+      <div className="flex items-center justify-between border-b border-[#262626] px-4 py-2.5 bg-[#1A1A1A]">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" aria-hidden="true" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" aria-hidden="true" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#3F3F46]" aria-hidden="true" />
         </div>
-        <span className="font-mono text-xs tracking-wide text-[#71717A]">bmdev@terminal:~/init</span>
+        <span className="font-mono text-xs tracking-wide text-[#A8A29E]">bmdev@terminal:~/init</span>
         <div className="w-10" />
       </div>
 
-      <div className="terminal-content flex-1 overflow-x-auto overflow-y-auto p-6 font-mono text-xs sm:text-sm leading-relaxed text-[#FAFAFA]">
+      <div className="terminal-content flex-1 overflow-x-auto overflow-y-auto p-6 font-mono text-xs sm:text-sm leading-relaxed text-[#F3EEE3]">
         <pre className="whitespace-pre-wrap wrap-break-word">
           <code className="hljs">
             <span dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
             <span className="terminal-cursor ml-1 inline-block align-middle">
-              <span className="block h-4 w-2 bg-[#E8452C]" />
+              <span className="block h-4 w-2 bg-[#D9541E]" />
             </span>
           </code>
         </pre>

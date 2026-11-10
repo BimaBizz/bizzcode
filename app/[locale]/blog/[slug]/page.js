@@ -49,8 +49,8 @@ export default async function BlogDetailPage({ params }) {
   return (
     <article className="space-y-6 max-w-4xl mx-auto px-4 py-8">
       <header className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FAFAFA]">{post.title}</h1>
-        {post.excerpt ? <p className="max-w-3xl text-sm text-[#A1A1AA] leading-relaxed">{post.excerpt}</p> : null}
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#111111]">{post.title}</h1>
+        {post.excerpt ? <p className="max-w-3xl text-sm text-[#57534E] leading-relaxed">{post.excerpt}</p> : null}
       </header>
 
       <CockpitImage
@@ -58,11 +58,11 @@ export default async function BlogDetailPage({ params }) {
         alt={post.title}
         width={1400}
         height={800}
-        className="h-auto w-full rounded-xl border border-border object-cover"
+        className="h-auto w-full rounded-xl border border-[#111111]/15 object-cover"
       />
 
       <div
-        className="prose prose-neutral max-w-none dark:prose-invert"
+        className="prose prose-neutral max-w-none prose-headings:text-[#111111] prose-p:text-[#57534E] prose-a:text-[#D9541E]"
         dangerouslySetInnerHTML={{ __html: post.content || "" }}
       />
     </article>

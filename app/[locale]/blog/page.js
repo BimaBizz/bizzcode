@@ -25,10 +25,10 @@ export default async function BlogPage({ params }) {
 
   return (
     <section className="space-y-6 max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold tracking-tight text-[#FAFAFA]">Blog</h1>
+      <h1 className="text-3xl font-bold tracking-tight text-[#111111]">Blog</h1>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {posts.map((post) => (
-          <article key={post._id} className="overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] p-5 shadow-lg transition-colors hover:border-[#3F3F46]">
+          <article key={post._id} className="overflow-hidden rounded-xl border border-[#111111]/15 bg-[#FAF7F0] p-5 shadow-sm transition-colors hover:border-[#111111]/40">
             <CockpitImage
               asset={post.featured_image}
               alt={post.title}
@@ -37,10 +37,10 @@ export default async function BlogPage({ params }) {
               className="h-44 w-full object-cover rounded-lg"
             />
             <div className="space-y-2 pt-4">
-              <h2 className="text-lg font-bold tracking-tight text-[#FAFAFA] hover:text-[#E8452C] transition-colors">
+              <h2 className="text-lg font-bold tracking-tight text-[#111111] hover:text-[#D9541E] transition-colors">
                 <Link href={localePath(locale, `blog/${post.slug}`)}>{post.title}</Link>
               </h2>
-              {post.excerpt ? <p className="text-xs text-[#A1A1AA] leading-relaxed line-clamp-3">{post.excerpt}</p> : null}
+              {post.excerpt ? <p className="text-xs text-[#57534E] leading-relaxed line-clamp-3">{post.excerpt}</p> : null}
             </div>
           </article>
         ))}

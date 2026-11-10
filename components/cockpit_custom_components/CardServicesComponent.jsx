@@ -112,7 +112,7 @@ export default function CardServicesComponent({ data, locale }) {
       {/* Left Sidebar: Service Navigation List */}
       <nav
         aria-label="Services List"
-        className="w-full md:w-64 lg:w-72 shrink-0 border-l border-[#27272A] relative flex flex-row md:flex-col overflow-x-auto md:overflow-visible no-scrollbar py-1"
+        className="w-full md:w-64 lg:w-72 shrink-0 border-l border-[#111111]/15 relative flex flex-row md:flex-col overflow-x-auto md:overflow-visible no-scrollbar py-1"
       >
         {items.map((item, index) => {
           const isActive = index === safeIndex;
@@ -126,8 +126,8 @@ export default function CardServicesComponent({ data, locale }) {
               className={cn(
                 "group relative text-left py-2.5 px-4 md:px-5 text-sm transition-all duration-200 select-none whitespace-nowrap md:whitespace-normal shrink-0 md:shrink border-l-2 -ml-[1px]",
                 isActive
-                  ? "border-[#E8452C] text-[#FAFAFA] font-medium"
-                  : "border-transparent text-[#71717A] hover:text-[#D4D4D8]"
+                  ? "border-[#D9541E] text-[#111111] font-semibold"
+                  : "border-transparent text-[#57534E] hover:text-[#111111]"
               )}
             >
               <span className="block leading-snug">
@@ -138,18 +138,18 @@ export default function CardServicesComponent({ data, locale }) {
         })}
       </nav>
 
-      {/* Right Column: Active Service Card (rounded-xl, border-[#27272A], p-6 md:p-8) */}
-      <article className="flex-1 w-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between transition-all duration-200">
+      {/* Right Column: Active Service Card */}
+      <article className="flex-1 w-full bg-[#FAF7F0] border border-[#111111]/15 rounded-xl p-6 md:p-8 shadow-sm flex flex-col justify-between transition-all duration-200">
         <div key={safeIndex} className="animate-in fade-in duration-200 flex flex-col justify-between h-full">
           <div>
             {/* Header: Title and Description */}
             <div className="flex flex-col">
-              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
+              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#111111]">
                 {activeItem?.serviceName}
               </h3>
 
               {activeItem?.serviceDesc && (
-                <p className="text-[#A1A1AA] text-xs sm:text-sm leading-relaxed mt-1 font-normal">
+                <p className="text-[#57534E] text-xs sm:text-sm leading-relaxed mt-1 font-normal">
                   {activeItem.serviceDesc}
                 </p>
               )}
@@ -158,12 +158,12 @@ export default function CardServicesComponent({ data, locale }) {
             {/* Service Content: Rendered via @tailwindcss/typography (prose) */}
             {activeItem?.serviceContent && (
               <div
-                className="prose prose-sm prose-invert max-w-none mt-6
-                  prose-headings:text-sm prose-headings:font-semibold prose-headings:text-[#FAFAFA] prose-ul:mt-3 prose-headings:tracking-tight prose-headings:mt-0 prose-headings:mb-3
-                  prose-p:my-0 prose-p:text-xs sm:prose-p:text-sm prose-p:text-[#D4D4D8] prose-p:leading-relaxed
+                className="prose prose-sm prose-neutral max-w-none mt-6
+                  prose-headings:text-sm prose-headings:font-semibold prose-headings:text-[#111111] prose-ul:mt-3 prose-headings:tracking-tight prose-headings:mt-0 prose-headings:mb-3
+                  prose-p:my-0 prose-p:text-xs sm:prose-p:text-sm prose-p:text-[#57534E] prose-p:leading-relaxed
                   prose-ul:pl-4 
-                  prose-li:text-xs sm:prose-li:text-sm prose-li:text-[#D4D4D8]
-                  marker:text-[#E8452C] prose-li:marker:text-[#E8452C]"
+                  prose-li:text-xs sm:prose-li:text-sm prose-li:text-[#57534E]
+                  marker:text-[#D9541E] prose-li:marker:text-[#D9541E]"
                 dangerouslySetInnerHTML={{ __html: cleanWysiwygHtml(activeItem.serviceContent) }}
               />
             )}
@@ -171,14 +171,14 @@ export default function CardServicesComponent({ data, locale }) {
             {/* Technology Badges */}
             {Array.isArray(activeItem?.serviceTech) && activeItem.serviceTech.length > 0 && (
               <div className="mt-6">
-                <h4 className="text-sm font-semibold text-[#FAFAFA] tracking-tight mb-3">
+                <h4 className="text-sm font-semibold text-[#111111] tracking-tight mb-3">
                   Technology
                 </h4>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {activeItem.serviceTech.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="bg-[#181818] text-[#FAFAFA] border border-[#27272A] font-mono text-xs px-2.5 py-1 rounded-md hover:border-[#3F3F46] transition-colors"
+                      className="bg-[#EBE4D5] text-[#111111] border border-[#111111]/15 font-mono text-xs px-2.5 py-1 rounded-md hover:border-[#111111]/40 transition-colors"
                     >
                       {tech}
                     </span>
@@ -188,20 +188,20 @@ export default function CardServicesComponent({ data, locale }) {
             )}
           </div>
 
-          {/* Footer Actions: Quote Button & Sample Link */}          <div className="mt-8 pt-4 border-t border-[#27272A] flex flex-wrap items-center gap-4 sm:gap-6">
+          {/* Footer Actions: Quote Button & Sample Link */}          <div className="mt-8 pt-4 border-t border-[#111111]/15 flex flex-wrap items-center gap-4 sm:gap-6">
             <Link
               href={quoteHref}
-              className="inline-flex items-center justify-center font-medium px-5 py-2.5 rounded-lg text-xs sm:text-sm bg-[#E8452C] hover:bg-[#d43c24] text-white shadow-sm transition-all duration-200 active:scale-95"
+              className="inline-flex items-center justify-center font-medium px-5 py-2.5 rounded-lg text-xs sm:text-sm bg-[#D9541E] hover:bg-[#BF4615] text-[#F3EEE3] shadow-sm transition-all duration-200 active:scale-95"
             >
               {quoteLabel}
             </Link>
 
             {sampleLink && (
-              <div className="text-xs sm:text-sm text-[#A1A1AA] flex items-center gap-1.5 flex-wrap">
+              <div className="text-xs sm:text-sm text-[#57534E] flex items-center gap-1.5 flex-wrap">
                 <span>See an example:</span>
                 <Link
                   href={sampleLink.href}
-                  className="underline text-[#FAFAFA] hover:text-[#E8452C] transition-colors font-medium decoration-1 underline-offset-4"
+                  className="underline text-[#111111] hover:text-[#D9541E] transition-colors font-medium decoration-1 underline-offset-4"
                 >
                   {sampleLink.title}
                 </Link>

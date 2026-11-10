@@ -132,7 +132,7 @@ export default function CustomComponentRenderer({ rawComponent, item, data, nest
   }
 
   if (typeof data?.content === "string" && data.content.trim()) {
-    return <div className="prose prose-invert max-w-none text-[#FAFAFA] prose-headings:font-sans prose-headings:text-[#FAFAFA] prose-p:text-[#A1A1AA] prose-a:text-[#E8452C]" dangerouslySetInnerHTML={{ __html: data.content }} />;
+    return <div className="prose prose-neutral max-w-none text-[#111111] prose-headings:font-sans prose-headings:text-[#111111] prose-p:text-[#57534E] prose-a:text-[#D9541E]" dangerouslySetInnerHTML={{ __html: data.content }} />;
   }
 
   return null;

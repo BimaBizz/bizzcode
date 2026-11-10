@@ -52,13 +52,13 @@ export default function CardCtaComponent({ data, locale, className }) {
   return (
     <article
       className={cn(
-        "w-full bg-[#121212] border border-[#27272A] rounded-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col justify-between my-4 transition-all duration-200",
+        "w-full bg-[#111111] border border-[#262626] rounded-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col justify-between my-4 transition-all duration-200",
         className
       )}
     >
       <div className="max-w-2xl">
         {title && (
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#FAFAFA]">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#F3EEE3]">
             {title}
           </h3>
         )}
@@ -66,11 +66,11 @@ export default function CardCtaComponent({ data, locale, className }) {
         {desc && (
           isHtmlDesc ? (
             <div
-              className="mt-3 text-sm sm:text-base text-[#A1A1AA] leading-relaxed font-normal [&_p]:my-0"
+              className="mt-3 text-sm sm:text-base text-[#F3EEE3]/75 leading-relaxed font-normal [&_p]:my-0"
               dangerouslySetInnerHTML={{ __html: desc }}
             />
           ) : (
-            <p className="mt-3 text-sm sm:text-base text-[#A1A1AA] leading-relaxed font-normal">
+            <p className="mt-3 text-sm sm:text-base text-[#F3EEE3]/75 leading-relaxed font-normal">
               {desc}
             </p>
           )
@@ -80,7 +80,7 @@ export default function CardCtaComponent({ data, locale, className }) {
       <div className="mt-6 sm:mt-8">
         <Link
           href={buttonUrl}
-          className="inline-flex items-center justify-center font-medium px-6 py-2.5 rounded-lg text-xs sm:text-sm bg-[#E8452C] hover:bg-[#d43c24] text-white shadow-sm transition-all duration-200 active:scale-95 w-fit"
+          className="inline-flex items-center justify-center font-medium px-6 py-2.5 rounded-lg text-xs sm:text-sm bg-[#D9541E] hover:bg-[#BF4615] text-[#F3EEE3] shadow-sm transition-all duration-200 active:scale-95 w-fit"
         >
           {buttonText}
         </Link>

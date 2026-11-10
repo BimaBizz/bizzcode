@@ -14,7 +14,7 @@ export default function SectionTitleComponent({ data }) {
 
   if (!highlight) {
     return (
-      <Tag className="text-3xl md:text-5xl font-bold tracking-tight text-[#FAFAFA]">
+      <Tag className="text-3xl md:text-5xl font-bold tracking-tight text-[#111111]">
         {title}
       </Tag>
     );
@@ -25,10 +25,10 @@ export default function SectionTitleComponent({ data }) {
   const parts = title.split(regex);
 
   return (
-    <Tag className="text-3xl md:text-5xl font-bold tracking-tight text-[#FAFAFA]">
+    <Tag className="text-3xl md:text-5xl font-bold tracking-tight text-[#111111]">
       {parts.map((part, index) => (
         part.toLowerCase() === highlight.toLowerCase() ? (
-          <em key={`${part}-${index}`} className="text-[#E8452C] not-italic font-semibold">
+          <em key={`${part}-${index}`} className="text-[#D9541E] not-italic font-semibold">
             {part}
           </em>
         ) : (

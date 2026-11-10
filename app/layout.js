@@ -19,8 +19,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id" data-scroll-behavior="smooth" className={`${fontSans.variable} ${fontMono.variable} dark`}>
-      <body className="antialiased min-h-screen bg-[#0A0A0A] text-[#FAFAFA] font-sans selection:bg-[#E8452C] selection:text-white" suppressHydrationWarning>
+    <html lang="id" data-scroll-behavior="smooth" className={`${fontSans.variable} ${fontMono.variable}`}>
+      <body className="antialiased min-h-screen bg-[#F3EEE3] text-[#111111] font-sans selection:bg-[#D9541E] selection:text-[#F3EEE3]" suppressHydrationWarning>
         {children}
       </body>
     </html>

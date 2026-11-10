@@ -19,7 +19,7 @@ export default function DetailContactComponent({ data }) {
       {/* Icon Container */}
       {iconHtml && (
         <div
-          className="h-10 w-10 shrink-0 flex items-center justify-center p-2 rounded-lg bg-[#181818] text-[#E8452C] border border-[#27272A] detail-contact-icon"
+          className="h-10 w-10 shrink-0 flex items-center justify-center p-2 rounded-lg bg-[#111111] text-[#D9541E] border border-[#111111] detail-contact-icon"
           dangerouslySetInnerHTML={{ __html: iconHtml }}
         />
       )}
@@ -27,12 +27,12 @@ export default function DetailContactComponent({ data }) {
       {/* Text Container */}
       <div className="flex flex-col">
         {title && (
-          <span className="text-[11px] font-semibold text-[#A1A1AA] font-mono tracking-wider uppercase">
+          <span className="text-[11px] font-semibold text-[#57534E] font-mono tracking-wider uppercase">
             {title}
           </span>
         )}
         {subTitle && (
-          <h4 className="text-sm sm:text-base font-semibold tracking-tight text-[#FAFAFA] mt-0.5 leading-tight">
+          <h4 className="text-sm sm:text-base font-semibold tracking-tight text-[#111111] mt-0.5 leading-tight">
             {subTitle}
           </h4>
         )}

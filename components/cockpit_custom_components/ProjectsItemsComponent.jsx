@@ -63,9 +63,9 @@ export default async function ProjectsItemsComponent({ data, locale }) {
         const techs = Array.isArray(project.tech) ? project.tech : [];
 
         const cardContent = (
-          <article className="group h-full flex flex-col overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] hover:border-[#3F3F46] shadow-lg transition-colors">
+          <article className="group h-full flex flex-col overflow-hidden rounded-xl border border-[#111111]/15 bg-[#FAF7F0] hover:border-[#111111]/40 shadow-sm transition-colors">
             {/* Image Container */}
-            <div className="relative aspect-16/10 w-full overflow-hidden bg-[#0A0A0A]">
+            <div className="relative aspect-16/10 w-full overflow-hidden bg-[#111111]">
               {getSingleImageAsset(project.image) ? (
                 <CockpitImage
                   asset={getSingleImageAsset(project.image)}
@@ -73,16 +73,16 @@ export default async function ProjectsItemsComponent({ data, locale }) {
                   width={640}
                   height={400}
                   priority={index < 2}
-                  className="h-full w-full object-cover opacity-90 transition-transform duration-500 ease-out group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center bg-[#0A0A0A] text-xs font-mono text-[#71717A]">
+                <div className="flex h-full w-full items-center justify-center bg-[#EBE4D5] text-xs font-mono text-[#57534E]">
                   No preview image
                 </div>
               )}
 
               {typeName ? (
-                <div className="absolute right-3 top-3 rounded-md bg-[#121212]/90 border border-[#27272A] text-[#FAFAFA] px-2.5 py-1 text-[11px] font-mono backdrop-blur-md">
+                <div className="absolute right-3 top-3 rounded-md bg-[#111111]/90 border border-[#262626] text-[#F3EEE3] px-2.5 py-1 text-[11px] font-mono backdrop-blur-md">
                   {typeName}
                 </div>
               ) : null}
@@ -91,12 +91,12 @@ export default async function ProjectsItemsComponent({ data, locale }) {
             {/* Content Container */}
             <div className="flex-1 flex flex-col justify-between p-5 space-y-3">
               <div className="space-y-2">
-                <h3 className="text-lg font-bold tracking-tight text-[#FAFAFA] transition-colors group-hover:text-[#E8452C]">
+                <h3 className="text-lg font-bold tracking-tight text-[#111111] transition-colors group-hover:text-[#D9541E]">
                   {project.title || "Untitled Project"}
                 </h3>
 
                 {excerpt ? (
-                  <p className="text-xs leading-relaxed text-[#A1A1AA] line-clamp-3">
+                  <p className="text-xs leading-relaxed text-[#57534E] line-clamp-3">
                     {excerpt}
                   </p>
                 ) : null}
@@ -108,7 +108,7 @@ export default async function ProjectsItemsComponent({ data, locale }) {
                   {techs.map((tech, techIdx) => (
                     <span
                       key={`${tech}-${techIdx}`}
-                      className="font-mono text-[10px] bg-[#181818] text-[#FAFAFA] border border-[#27272A] px-2 py-0.5 rounded"
+                      className="font-mono text-[10px] bg-[#EBE4D5] text-[#111111] border border-[#111111]/15 px-2 py-0.5 rounded"
                     >
                       {tech}
                     </span>

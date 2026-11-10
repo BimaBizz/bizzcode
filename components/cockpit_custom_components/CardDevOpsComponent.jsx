@@ -45,7 +45,7 @@ export default function CardDevOpsComponent({ data }) {
   const imageAlt = image?.title || image?.altText || "DevOps network image";
 
   return (
-    <article className="w-full h-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between">
+    <article className="w-full h-full bg-[#FAF7F0] border border-[#111111]/15 rounded-xl p-6 md:p-8 shadow-sm flex flex-col justify-between">
       <style dangerouslySetInnerHTML={{
         __html: `
         .devops-card-icon svg {
@@ -60,12 +60,12 @@ export default function CardDevOpsComponent({ data }) {
         <div className="flex flex-col items-start gap-3.5 mb-6">
           {headerIcon && (
             <div
-              className="h-10 w-10 flex items-center justify-center p-2 rounded-lg bg-[#181818] text-[#FAFAFA] border border-[#27272A] devops-card-icon"
+              className="h-10 w-10 flex items-center justify-center p-2 rounded-lg bg-[#111111] text-[#F3EEE3] border border-[#111111] devops-card-icon"
               dangerouslySetInnerHTML={{ __html: headerIcon }}
             />
           )}
           {headerTitle && (
-            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#111111]">
               {headerTitle}
             </h3>
           )}
@@ -82,22 +82,22 @@ export default function CardDevOpsComponent({ data }) {
               return (
                 <div
                   key={index}
-                  className="flex flex-col border-b border-[#27272A] pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
+                  className="flex flex-col border-b border-[#111111]/10 pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
                 >
                   <div className="flex justify-between items-baseline">
                     {title && (
-                      <h4 className="text-sm font-semibold text-[#FAFAFA] tracking-tight">
+                      <h4 className="text-sm font-semibold text-[#111111] tracking-tight">
                         {title}
                       </h4>
                     )}
                     {percent !== "" && (
-                      <span className="text-sm font-mono font-bold text-[#FAFAFA]">
+                      <span className="text-sm font-mono font-bold text-[#D9541E]">
                         {percent}%
                       </span>
                     )}
                   </div>
                   {subTitle && (
-                    <p className="text-[#A1A1AA] text-xs mt-1 font-normal">
+                    <p className="text-[#57534E] text-xs mt-1 font-normal">
                       {subTitle}
                     </p>
                   )}
@@ -110,7 +110,7 @@ export default function CardDevOpsComponent({ data }) {
 
       {/* Footer Image */}
       {image && (
-        <div className="w-full overflow-hidden rounded-lg border border-[#27272A] mt-4">
+        <div className="w-full overflow-hidden rounded-lg border border-[#111111]/15 mt-4">
           {image.path ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img

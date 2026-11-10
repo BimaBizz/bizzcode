@@ -11,8 +11,22 @@ const normalizeColorValue = (value) => {
 
   const raw = value.trim();
   const isHexWithoutHash = /^[0-9a-fA-F]{3,4}$|^[0-9a-fA-F]{6}$|^[0-9a-fA-F]{8}$/.test(raw);
+  const formatted = isHexWithoutHash ? `#${raw}` : raw;
+  const lower = formatted.toLowerCase();
 
-  return isHexWithoutHash ? `#${raw}` : raw;
+  // Map legacy dark section backgrounds to transparent so the #F3EEE3 canvas shows through cleanly
+  if (
+    lower === "#0a0a0a" ||
+    lower === "#000000" ||
+    lower === "#000" ||
+    lower === "#121212" ||
+    lower === "#181818" ||
+    lower === "#0d0d10"
+  ) {
+    return "transparent";
+  }
+
+  return formatted;
 };
 
 export default function SectionComponent({ item, data, nestedComponents, locale, LayoutRenderer }) {

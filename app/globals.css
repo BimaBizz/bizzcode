@@ -8,67 +8,70 @@
   --font-sans: var(--font-sans), 'Inter', sans-serif;
   --font-heading: var(--font-sans), 'Inter', sans-serif;
   --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
-  --color-primary: #E8452C;
-  --color-background: #0A0A0A;
-  --color-foreground: #FAFAFA;
+  --color-primary: #D9541E;
+  --color-background: #F3EEE3;
+  --color-foreground: #111111;
 }
 
 :root {
-  --bmdev-accent: #E8452C;
-  --bmdev-accent-hover: #D43C24;
-  --bmdev-accent-muted: rgba(232, 69, 44, 0.12);
+  --bmdev-accent: #D9541E;
+  --bmdev-accent-hover: #BF4615;
+  --bmdev-accent-muted: rgba(217, 84, 30, 0.12);
 
-  --primary: #E8452C;
-  --primary-foreground: #FFFFFF;
-  --primary-container: #1F1210;
-  --on-primary-container: #FFD5CE;
+  --primary: #D9541E;
+  --primary-foreground: #F3EEE3;
+  --primary-container: #F9E3D9;
+  --on-primary-container: #5C1F06;
 
-  --secondary: #27272A;
-  --secondary-foreground: #FAFAFA;
+  --secondary: #EBE4D5;
+  --secondary-foreground: #111111;
 
-  --surface: #0A0A0A;
-  --surface-high: #121212;
-  --surface-higher: #181818;
-  --on-surface: #FAFAFA;
-  --on-surface-muted: #A1A1AA;
-  --outline: #27272A;
-  --outline-strong: #3F3F46;
+  --surface: #F3EEE3;
+  --surface-high: #FAF7F0;
+  --surface-higher: #EBE4D5;
+  --surface-dark: #111111;
+  --on-surface: #111111;
+  --on-surface-muted: #57534E;
+  --outline: #DCD4C4;
+  --outline-strong: #111111;
 
-  --background: #0A0A0A;
-  --foreground: #FAFAFA;
-  --card: #121212;
-  --card-hover: #181818;
-  --card-foreground: #FAFAFA;
-  --border: #27272A;
-  --muted: #181818;
-  --muted-foreground: #A1A1AA;
+  --background: #F3EEE3;
+  --foreground: #111111;
+  --card: #FAF7F0;
+  --card-hover: #FFFFFF;
+  --card-foreground: #111111;
+  --border: #DCD4C4;
+  --muted: #EBE4D5;
+  --muted-foreground: #57534E;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
-body {
-  margin: 0;
-  background: var(--background) !important;
-  color: var(--foreground) !important;
-  font-family: var(--font-sans), 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  position: relative;
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  h1, h2, h3, h4, h5, h6, .display, .font-heading {
+    font-family: var(--font-sans), 'Inter', sans-serif;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .mono, code, pre {
+    font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  }
+
+  a { text-decoration: none; }
+  img { max-width: 100%; display: block; }
 }
-
-h1, h2, h3, h4, h5, h6, .display, .font-heading {
-  font-family: var(--font-sans), 'Inter', sans-serif !important;
-  letter-spacing: -0.025em;
-  margin: 0;
-}
-
-.mono, code, pre {
-  font-family: var(--font-mono), 'JetBrains Mono', monospace;
-}
-
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
 /* BMDev Technical Details */
@@ -85,4 +88,57 @@ img { max-width: 100%; display: block; }
 .card-technical:hover {
   border-color: var(--outline-strong);
   background-color: var(--card-hover);
+}
+
+/* Custom Highlight.js Theme (Warm Cream #F3EEE3, Charcoal #111111, Terracotta #D9541E) */
+.hljs {
+  color: #F3EEE3 !important;
+  background: #111111 !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #78716C !important;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-meta,
+.hljs-deletion {
+  color: #D9541E !important;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr,
+.hljs-symbol,
+.hljs-bullet {
+  color: #F28C5E !important;
+}
+
+.hljs-string,
+.hljs-doctag,
+.hljs-addition,
+.hljs-regexp {
+  color: #A3BE8C !important;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-built_in,
+.hljs-name,
+.hljs-type,
+.hljs-attr,
+.hljs-attribute {
+  color: #EBCB8B !important;
+}
+
+.hljs-subst,
+.hljs-punctuation,
+.hljs-operator,
+.hljs-tag {
+  color: #D6CFC2 !important;
 }

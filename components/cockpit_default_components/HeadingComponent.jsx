@@ -11,7 +11,7 @@ export default function HeadingComponent({ data }) {
   };
 
   return (
-    <Tag className={`${sizeByLevel[level]} tracking-tight font-bold text-[#FAFAFA] space-y-4`}>
+    <Tag className={`${sizeByLevel[level]} tracking-tight font-bold text-[#111111] space-y-4`}>
       {data.text}
     </Tag>
   );

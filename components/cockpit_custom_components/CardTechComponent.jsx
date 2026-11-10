@@ -31,8 +31,8 @@ export default function CardTechComponent({ data }) {
           if (trimmed.startsWith("$")) {
             const command = trimmed.substring(1).trim();
             return (
-              <div key={index} className="text-[#FAFAFA]">
-                <span className="text-[#E8452C] select-none mr-2 font-bold">$</span>
+              <div key={index} className="text-[#F3EEE3]">
+                <span className="text-[#D9541E] select-none mr-2 font-bold">$</span>
                 {command}
               </div>
             );
@@ -47,7 +47,7 @@ export default function CardTechComponent({ data }) {
           }
 
           return (
-            <div key={index} className="text-[#A1A1AA]">
+            <div key={index} className="text-[#A8A29E]">
               {line}
             </div>
           );
@@ -57,7 +57,7 @@ export default function CardTechComponent({ data }) {
   };
 
   return (
-    <article className="w-full h-full bg-[#121212] border border-[#27272A] rounded-xl p-6 md:p-8 shadow-xl flex flex-col justify-between">
+    <article className="w-full h-full bg-[#FAF7F0] border border-[#111111]/15 rounded-xl p-6 md:p-8 shadow-sm flex flex-col justify-between">
       <style dangerouslySetInnerHTML={{
         __html: `
         .tech-card-icon svg {
@@ -71,12 +71,12 @@ export default function CardTechComponent({ data }) {
         <div className="flex items-center gap-3.5 mb-6">
           {headerIcon && (
             <div
-              className="h-10 w-10 flex items-center justify-center p-2 rounded-lg bg-[#181818] text-[#FAFAFA] border border-[#27272A] tech-card-icon"
+              className="h-10 w-10 flex items-center justify-center p-2 rounded-lg bg-[#111111] text-[#F3EEE3] border border-[#111111] tech-card-icon"
               dangerouslySetInnerHTML={{ __html: headerIcon }}
             />
           )}
           {headerTitle && (
-            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#FAFAFA]">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#111111]">
               {headerTitle}
             </h3>
           )}
@@ -92,16 +92,16 @@ export default function CardTechComponent({ data }) {
 
               return (
                 <div key={index} className="flex flex-col">
-                  <span className="text-xs font-mono font-bold text-[#E8452C] tracking-wider">
+                  <span className="text-xs font-mono font-bold text-[#D9541E] tracking-wider">
                     {num}
                   </span>
                   {itemTitle && (
-                    <h4 className="text-base font-bold text-[#FAFAFA] mt-1 tracking-tight">
+                    <h4 className="text-base font-bold text-[#111111] mt-1 tracking-tight">
                       {itemTitle}
                     </h4>
                   )}
                   {itemSubTitle && (
-                    <p className="text-[#A1A1AA] text-xs leading-relaxed mt-1 font-normal">
+                    <p className="text-[#57534E] text-xs leading-relaxed mt-1 font-normal">
                       {itemSubTitle}
                     </p>
                   )}
@@ -114,7 +114,7 @@ export default function CardTechComponent({ data }) {
 
       {/* Footer Terminal */}
       {footerHtml && (
-        <div className="bg-[#080808] border border-[#27272A] rounded-lg p-4 shadow-inner select-text">
+        <div className="bg-[#111111] border border-[#262626] rounded-lg p-4 shadow-inner select-text">
           <div className="flex items-center gap-1.5 mb-3">
             <span className="w-2 h-2 rounded-full bg-[#3F3F46]" />
             <span className="w-2 h-2 rounded-full bg-[#3F3F46]" />

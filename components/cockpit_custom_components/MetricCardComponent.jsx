@@ -12,20 +12,20 @@ export default function MetricCardComponent({ data, className }) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border border-[#27272A] bg-[#121212] hover:border-[#3F3F46] p-6 flex flex-col justify-center shadow-lg transition-colors",
+        "relative overflow-hidden rounded-xl border border-[#111111]/15 bg-[#FAF7F0] hover:border-[#111111]/40 p-6 flex flex-col justify-center shadow-sm transition-colors",
         className
       )}
     >
       <div className="flex flex-col justify-center">
         {number !== "" && (
-          <div className="flex items-baseline font-mono text-3xl sm:text-4xl font-bold tracking-tight text-[#FAFAFA]">
+          <div className="flex items-baseline font-mono text-3xl sm:text-4xl font-bold tracking-tight text-[#111111]">
             <span>{number}</span>
-            {unit && <span className="ml-1 text-xl sm:text-2xl font-semibold text-[#E8452C]">{unit}</span>}
+            {unit && <span className="ml-1 text-xl sm:text-2xl font-semibold text-[#D9541E]">{unit}</span>}
           </div>
         )}
 
         {subTitle && (
-          <p className="text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA] mt-1.5 font-medium">
+          <p className="text-[11px] font-mono uppercase tracking-wider text-[#57534E] mt-1.5 font-medium">
             {subTitle}
           </p>
         )}

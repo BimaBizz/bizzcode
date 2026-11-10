@@ -37,7 +37,7 @@ export default function ImageSlider({ images }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative aspect-[16/10] sm:aspect-[21/9] w-full overflow-hidden rounded-xl border border-[#27272A] bg-[#0A0A0A] shadow-xl group"
+      className="relative aspect-[16/10] sm:aspect-[21/9] w-full overflow-hidden rounded-xl border border-[#111111]/15 bg-[#111111] shadow-xl group"
     >
       {/* Slides */}
       <div className="relative w-full h-full">
@@ -65,7 +65,7 @@ export default function ImageSlider({ images }) {
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-[#121212]/80 backdrop-blur-md text-[#FAFAFA] border border-[#27272A] hover:border-[#E8452C] transition-all opacity-0 group-hover:opacity-100 duration-200 cursor-pointer shadow-md"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-[#111111]/85 backdrop-blur-md text-[#F3EEE3] border border-[#262626] hover:border-[#D9541E] transition-all opacity-0 group-hover:opacity-100 duration-200 cursor-pointer shadow-md"
             aria-label="Previous image"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -74,7 +74,7 @@ export default function ImageSlider({ images }) {
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-[#121212]/80 backdrop-blur-md text-[#FAFAFA] border border-[#27272A] hover:border-[#E8452C] transition-all opacity-0 group-hover:opacity-100 duration-200 cursor-pointer shadow-md"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-[#111111]/85 backdrop-blur-md text-[#F3EEE3] border border-[#262626] hover:border-[#D9541E] transition-all opacity-0 group-hover:opacity-100 duration-200 cursor-pointer shadow-md"
             aria-label="Next image"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -86,12 +86,12 @@ export default function ImageSlider({ images }) {
 
       {/* Indicators */}
       {showControls && (
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 bg-[#121212]/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-[#27272A]">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 bg-[#111111]/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-[#262626]">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-[#E8452C] w-3.5" : "bg-[#3F3F46] w-1.5"
+              className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-[#D9541E] w-3.5" : "bg-[#F3EEE3]/40 w-1.5"
                 }`}
               aria-label={`Go to slide ${index + 1}`}
             />

@@ -19,9 +19,9 @@ export default function TagsComponent({ data }) {
       {tags.map((tag, index) => (
         <div
           key={`${tag}-${index}`}
-          className="inline-flex items-center gap-2 text-xs font-mono font-medium px-3 py-1.5 rounded-md bg-[#181818] text-[#FAFAFA] border border-[#27272A]"
+          className="inline-flex items-center gap-2 text-xs font-mono font-medium px-3 py-1.5 rounded-md bg-[#FAF7F0] text-[#111111] border border-[#111111]/15"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E8452C]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#D9541E]" />
           <span>{tag}</span>
         </div>
       ))}
